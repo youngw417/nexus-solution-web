@@ -1,0 +1,14 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "routes": [
+    { "route": "/og.png", "headers": { "cache-control": "public, max-age=86400" } },
+    { "route": "/favicon.svg", "headers": { "cache-control": "public, max-age=86400" } },
+    { "route": "/apple-touch-icon.png", "headers": { "cache-control": "public, max-age=86400" } }
+  ]
+}
