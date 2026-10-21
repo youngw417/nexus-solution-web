@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* 기본은 밝은 화면. 방문자가 토글로 고른 경우에만 어두워집니다. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --ground: #F4F4F4;
+  --surface: #FFFFFF;
+  --surface-2: #EAEAEA;
+  --ink: #111111;
+  --ink-2: #56534F;
+  --ink-3: #8A8683;
+  --line: #DAD7D4;
+  --line-2: #BFBCB9;
+  --red: #EE1111;
+  --red-ink: #C21010;
+  --red-soft: #FBE3E1;
+  --mark-wash: rgba(17, 17, 17, .045);
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --ground: #101010;
+  --surface: #1A1918;
+  --surface-2: #242322;
+  --ink: #EFEDEB;
+  --ink-2: #AAA6A2;
+  --ink-3: #7B7773;
+  --line: #2E2C2A;
+  --line-2: #413E3C;
+  --red: #FF5A4D;
+  --red-ink: #FF7A6E;
+  --red-soft: #3A1714;
+  --mark-wash: rgba(255, 255, 255, .05);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-red: var(--red);
+  --color-red-ink: var(--red-ink);
+  --color-red-soft: var(--red-soft);
+  --font-display: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); text-wrap: balance; }
+  a:focus-visible, button:focus-visible, input:focus-visible,
+  select:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+  ::selection { background: var(--red-soft); }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-[1080px] px-4 sm:px-7; }
+
+  /* 로고 E의 빨간 세 줄 — 섹션 마커로 반복합니다 */
+  .bars { display: inline-flex; flex-direction: column; gap: 2.5px; width: 15px; margin-right: 9px; flex: none; }
+  .bars i { display: block; height: 2.5px; background: var(--red); }
+
+  .eyebrow {
+    @apply mb-4 flex items-center font-mono text-[11.5px] font-medium tracking-[.14em] uppercase text-red-ink;
+  }
+  .sec-label {
+    @apply mb-3 flex items-center font-mono text-[11.5px] tracking-[.14em] uppercase text-ink-3;
+  }
+  .h1 { @apply font-display text-[clamp(30px,5vw,50px)] leading-[1.25] font-extrabold tracking-[-.035em]; }
+  .h2 { @apply font-display text-[clamp(23px,3.2vw,32px)] leading-[1.32] font-extrabold tracking-[-.03em]; }
+  .h3 { @apply font-display text-[17.5px] leading-snug font-bold tracking-[-.018em]; }
+  .lede { @apply text-[clamp(15.5px,2vw,17.5px)] leading-[1.8] text-ink-2; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 border px-5 py-3 font-display text-[15px] font-bold tracking-[-.01em] no-underline transition-colors;
+  }
+  .btn-primary { @apply border-red bg-red text-white hover:border-red-ink hover:bg-red-ink; }
+  :root[data-theme="dark"] .btn-primary { color: #1A0806; }
+  .btn-ghost { @apply border-line-2 bg-surface text-ink hover:border-red hover:text-red-ink; }
+
+  /* 1px 선으로 나뉜 격자 — 명함 톤 */
+  .grid-rule { @apply grid gap-px border border-line bg-line; }
+  .grid-rule > * { @apply bg-surface; }
+
+  .field { @apply grid gap-1.5; }
+  .field label { @apply font-display text-[13px] font-bold text-ink-2; }
+  .input {
+    @apply w-full border border-line-2 bg-surface px-3.5 py-2.5 text-[15px] text-ink placeholder:text-ink-3;
+  }
+  .input:focus { outline: 2px solid var(--red); outline-offset: 0; border-color: var(--red); }
+
+  .prose-nx p { @apply mb-4; }
+  .prose-nx strong { @apply font-medium text-ink; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

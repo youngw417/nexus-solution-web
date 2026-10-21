@@ -1,0 +1,86 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Nexus Solution은 기업의 실제 업무를 분석해 AI를 적용할 지점을 찾고, 직원이 바로 쓸 수 있는 업무 방식으로 바꿔 드립니다. 판교 기반 AI 전환 컨설팅·실무 워크숍·업무 자동화.",
+} = Astro.props;
+
+const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | 기업과 AI를 연결합니다`;
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", site.url).href;
+---
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{fullTitle}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+<meta name="theme-color" content="#EE1111">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content={site.name}>
+<meta property="og:url" content={canonical}>
+<meta property="og:title" content={fullTitle}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={`${site.url}/og.png`}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="sitemap" href="/sitemap-index.xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  url: `${site.url}/`,
+  logo: `${site.url}/logo/nexus-logo-horizontal.svg`,
+  email: site.email,
+  telephone: "+82-10-5023-5369",
+  slogan: site.tagline,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "판교대장로2길 4, 102-408",
+    addressLocality: "성남시 분당구",
+    addressRegion: "경기도",
+    postalCode: site.postcode,
+    addressCountry: "KR",
+  },
+})} />
+
+<script is:inline>
+/* 저장된 선택을 페인트 전에 적용해 화면이 번쩍이지 않게 합니다 */
+(function () {
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+</head>
+<body class="min-h-screen">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-surface focus:px-4 focus:py-2">본문으로 건너뛰기</a>
+  <Header />
+  <main id="main">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>
