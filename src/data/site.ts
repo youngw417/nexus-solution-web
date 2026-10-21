@@ -5,7 +5,7 @@ export const site = {
   tagline: "기업과 AI를 연결하여 더 나은 비즈니스의 미래를 만듭니다.",
   sub: "AI를 가르치지 않습니다. 당신의 업무를 AI로 다시 설계합니다.",
   english: "Turning Business Processes into AI-Powered Workflows",
-  ceo: "원영원",
+  ceo: "원용욱",
   phone: "010-5023-5369",
   phoneHref: "tel:+821050235369",
   email: "info@nexus-ai-sol.com",
