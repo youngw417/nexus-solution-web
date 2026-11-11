@@ -4,24 +4,24 @@ import SectionHead from "../components/SectionHead.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { site } from "../data/site";
 ---
-<Base title="회사 소개" description="Nexus Solution은 소프트웨어 개발과 비즈니스 이해를 바탕으로 기업의 AI 전환을 돕는 판교 기반 회사입니다.">
+<Base title="회사 소개" description="Nexus Solution은 회사의 흩어진 데이터를 정리하고, 그 회사에 꼭 맞는 소프트웨어를 만들어 운영까지 맡는 판교 기반 회사입니다.">
   <section class="border-b border-line py-[clamp(56px,9vw,96px)]">
     <div class="wrap">
-      <SectionHead as="h1" label="회사 소개" title="기술, 비즈니스, 교육을<br>한 팀에서">
-        {site.name}은 기업이 AI를 <strong>‘배우는 것’에서 끝나지 않고 ‘일하는 방식’으로 바꾸도록</strong> 돕습니다.
-        소프트웨어를 직접 만들어 온 경험으로 업무를 분석하고, 현업이 이해하는 언어로 교육하고, 필요한 시스템까지 구축합니다.
+      <SectionHead as="h1" label="회사 소개" title="회사에 맞는 소프트웨어를<br>한 팀이 끝까지">
+        {site.name}은 회사가 패키지 소프트웨어에 맞추는 대신, <strong>소프트웨어가 회사에 맞도록</strong> 만듭니다.
+        흩어진 데이터를 정리하고, 업무 흐름에 맞춘 시스템을 직접 개발하고, 만든 뒤에도 운영과 개선을 맡습니다.
       </SectionHead>
     </div>
   </section>
 
   <section class="border-b border-line py-16">
     <div class="wrap">
-      <SectionHead label="세 가지 역량" title="어느 하나만으로는 업무가 바뀌지 않습니다" />
+      <SectionHead label="세 가지 역량" title="만드는 것만으로는 업무가 바뀌지 않습니다" />
       <div class="grid-rule mt-8 md:grid-cols-3">
         {[
-          ["기술", "Technology", "소프트웨어 개발 경험을 바탕으로, AI가 실제로 할 수 있는 일과 없는 일을 정확히 구분합니다. 필요한 시스템은 직접 만듭니다."],
-          ["비즈니스", "Business", "도구보다 업무를 먼저 봅니다. 시간과 비용이 어디서 새는지 찾아, 효과가 가장 큰 곳부터 바꿉니다."],
-          ["교육", "Enablement", "직원이 자기 업무 자료로 실습합니다. 교육 다음 날부터 쓰는 것이 목표입니다."],
+          ["데이터", "Data", "엑셀과 문서에 흩어진 데이터를 하나의 클라우드 데이터베이스로 정리합니다. 모든 시스템은 정리된 데이터에서 시작합니다."],
+          ["개발", "Engineering", "업무 흐름에 맞춘 웹 · 모바일 소프트웨어를 직접 만듭니다. 필요하면 Odoo 같은 검증된 오픈소스와 AI를 함께 씁니다."],
+          ["운영", "Operations", "만들고 끝내지 않습니다. 호스팅과 유지보수를 맡고, 쓰면서 나오는 요청을 계속 반영합니다."],
         ].map(([k, en, body]) => (
           <div class="p-6">
             <span class="font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">{en}</span>
@@ -38,9 +38,9 @@ import { site } from "../data/site";
       <SectionHead label="원칙" title="이렇게 일합니다" />
       <ol class="m-0 grid list-none gap-6 p-0">
         {[
-          ["작게 시작합니다", "한 부서, 한 업무에서 효과를 확인한 뒤 넓힙니다. 처음부터 큰 계약을 권하지 않습니다."],
-          ["산출물로 말합니다", "모든 단계가 끝나면 결재 문서에 붙일 수 있는 문서와 결과물이 남습니다."],
-          ["안전이 먼저입니다", "사내 자료를 어떤 기준으로 다룰지부터 정합니다. 기밀과 개인정보는 외부 AI에 넣지 않는 구성을 기본으로 합니다."],
+          ["작게 시작합니다", "가장 불편한 업무 하나부터 시스템으로 바꾸고, 효과를 확인한 뒤 넓힙니다. 처음부터 큰 계약을 권하지 않습니다."],
+          ["필요한 것만 만듭니다", "좋은 도구가 이미 있으면 그것을 맞춰 쓰도록 권합니다. 새로 만드는 것은 회사에 꼭 필요한 부분만입니다."],
+          ["데이터는 고객의 것입니다", "모든 데이터는 고객사 소유로 두고, 언제든 내려받을 수 있게 만듭니다. 접근 권한과 백업을 기본으로 설계합니다."],
           ["가까이 있습니다", "판교에 있어 판교·분당 기업은 온사이트로 빠르게 찾아갑니다."],
         ].map(([t, b], i) => (
           <li class="grid grid-cols-[2.5em_1fr] gap-3">

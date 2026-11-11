@@ -11,10 +11,10 @@ interface Props {
 
 const {
   title,
-  description = "Nexus Solution은 기업의 실제 업무를 분석해 AI를 적용할 지점을 찾고, 직원이 바로 쓸 수 있는 업무 방식으로 바꿔 드립니다. 판교 기반 AI 전환 컨설팅·실무 워크숍·업무 자동화.",
+  description = "Nexus Solution은 엑셀과 문서에 흩어진 데이터를 클라우드로 모으고, 회사에 꼭 맞는 업무 소프트웨어를 만들어 운영까지 맡습니다. 판교 기반 맞춤 소프트웨어 개발 · 오픈소스 ERP 연동 · AI 부가 서비스.",
 } = Astro.props;
 
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | 기업과 AI를 연결합니다`;
+const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | 회사에 꼭 맞는 소프트웨어`;
 const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", site.url).href;
 ---
 <!doctype html>

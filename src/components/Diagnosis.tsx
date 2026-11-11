@@ -5,7 +5,7 @@ type Answers = Record<string, number>;
 type Step = "intro" | "quiz" | "result";
 
 const sizes = ["10명 미만", "10~49명", "50~299명", "300명 이상"];
-const industries = ["제조", "유통 · 물류", "IT · 소프트웨어", "건설 · 부동산", "금융 · 보험", "서비스 · 기타"];
+const industries = ["제조", "교육기관 · 학원", "유통 · 도매", "회계 · 세무 · 노무", "건설 · 부동산", "서비스 · 기타"];
 
 function Bar({ value, tone = "red", label }: { value: number; tone?: "red" | "ink"; label: string }) {
   return (
@@ -39,7 +39,7 @@ export default function Diagnosis() {
         <ul className="mb-8 grid gap-4 p-0 sm:grid-cols-3" style={{ listStyle: "none" }}>
           {[
             ["12문항 · 3분", "이메일 없이 바로 시작합니다."],
-            ["두 가지 축", "AI 기회의 크기와 도입 준비도를 함께 봅니다."],
+            ["두 가지 축", "시스템화 효과와 데이터 준비도를 함께 봅니다."],
             ["즉시 결과", "점수와 유형, 추천 첫 단계를 바로 보여 드립니다."],
           ].map(([t, b]) => (
             <li key={t} className="border-t-2 border-red pt-3">
@@ -121,7 +121,7 @@ function Result({ answers, headingRef, onRestart }: { answers: Answers; headingR
         <p className="eyebrow"><span className="bars" aria-hidden="true"><i></i><i></i><i></i></span>진단 결과</p>
         <div className="mb-8 grid gap-8 md:grid-cols-[auto_1fr] md:items-center">
           <div>
-            <p className="m-0 font-mono text-[12px] text-ink-3">AI 준비도 종합</p>
+            <p className="m-0 font-mono text-[12px] text-ink-3">시스템화 진단 종합</p>
             <p className="m-0 font-display text-[64px] leading-none font-extrabold tracking-[-.04em]">{r.overall}<span className="text-[28px] text-ink-3">%</span></p>
           </div>
           <div className="grid gap-4">
@@ -209,8 +209,8 @@ function ReportForm({ answers }: { answers: Answers }) {
   return (
     <form onSubmit={submit} noValidate className="border border-line border-t-2 border-t-red bg-surface p-6 sm:p-8">
       <p className="mb-1 font-mono text-[11px] tracking-[.12em] text-red-ink uppercase">무료 상세 리포트</p>
-      <h2 className="h3 mb-2 !text-[21px]">부서별 상세 리포트를 메일로 받으시겠습니까?</h2>
-      <p className="mb-6 text-[14.5px] text-ink-2">영역별 해설과 우리 회사에 맞는 도입 순서를 정리해 보내 드립니다. <b className="font-medium text-ink">내부 보고 자료로 그대로 쓰실 수 있습니다.</b></p>
+      <h2 className="h3 mb-2 !text-[21px]">상세 리포트를 메일로 받으시겠습니까?</h2>
+      <p className="mb-6 text-[14.5px] text-ink-2">영역별 해설과 우리 회사에 맞는 시스템화 순서를 정리해 보내 드립니다. <b className="font-medium text-ink">내부 보고 자료로 그대로 쓰실 수 있습니다.</b></p>
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="field"><label htmlFor="d-company">회사명 *</label><input className="input" id="d-company" name="company" required autoComplete="organization" /></div>
         <div className="field"><label htmlFor="d-name">성함 · 직책 *</label><input className="input" id="d-name" name="name" required autoComplete="name" placeholder="홍길동 과장" /></div>

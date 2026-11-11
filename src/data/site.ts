@@ -2,9 +2,9 @@
 export const site = {
   name: "Nexus Solution",
   url: "https://www.nexus-ai-sol.com",
-  tagline: "기업과 AI를 연결하여 더 나은 비즈니스의 미래를 만듭니다.",
-  sub: "AI를 가르치지 않습니다. 당신의 업무를 AI로 다시 설계합니다.",
-  english: "Turning Business Processes into AI-Powered Workflows",
+  tagline: "회사에 꼭 맞는 소프트웨어를 만듭니다.",
+  sub: "흩어진 데이터를 클라우드로 모으고, 그 회사 업무에 맞는 소프트웨어를 만들어 운영까지 맡습니다.",
+  english: "Custom Software Built Around Your Business",
   ceo: "원용욱",
   phone: "010-5023-5369",
   phoneHref: "tel:+821050235369",
@@ -21,8 +21,8 @@ export const site = {
 
 export const nav = [
   { href: "/services", label: "서비스" },
-  { href: "/use-cases", label: "업무별 AI 활용" },
-  { href: "/diagnosis", label: "AI 준비도 진단" },
+  { href: "/cases", label: "사례 · 업종" },
+  { href: "/diagnosis", label: "시스템화 진단" },
   { href: "/resources", label: "자료실" },
   { href: "/about", label: "회사 소개" },
 ];

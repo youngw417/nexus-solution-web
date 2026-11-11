@@ -8,7 +8,7 @@ import { app } from "@azure/functions";
 import { questions, axisLabel, score } from "../../shared/diagnosis.mjs";
 
 const SITE = "https://www.nexus-ai-sol.com";
-const KINDS = { contact: "상담 문의", brochure: "소개서 요청", diagnosis: "AI 진단 리포트 요청" };
+const KINDS = { contact: "상담 문의", brochure: "소개서 요청", diagnosis: "시스템화 진단 리포트 요청" };
 const EMAIL_RE = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
 
 const esc = (s) =>
@@ -36,7 +36,7 @@ function reportHtml(r, company) {
     .map((a) => bar(a.area, Math.round((a.value / 3) * 100), a.axis === "opportunity" ? "#EE1111" : "#111111"))
     .join("");
   return `<div style="font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;max-width:600px;margin:0 auto;color:#111;line-height:1.7">
-  <p style="font-size:12px;letter-spacing:.12em;color:#C21010;margin:0 0 6px">AI 준비도 진단 리포트</p>
+  <p style="font-size:12px;letter-spacing:.12em;color:#C21010;margin:0 0 6px">업무 시스템화 진단 리포트</p>
   <h1 style="font-size:24px;margin:0 0 4px">${esc(company)}</h1>
   <p style="color:#56534F;margin:0 0 24px">종합 ${r.overall}% · ${esc(r.type.title)}</p>
   <table style="width:100%;border-collapse:collapse;margin-bottom:24px">
@@ -51,7 +51,7 @@ function reportHtml(r, company) {
   <p style="font-size:12px;letter-spacing:.12em;color:#8A8683;margin:0 0 6px">영역별 점수</p>
   <table style="width:100%;border-collapse:collapse;margin-bottom:28px">${areas}</table>
   <div style="border-top:2px solid #EE1111;padding-top:16px">
-    <p style="margin:0 0 8px"><b>결과를 바탕으로 30분 무료 상담을 받아 보세요.</b><br>우리 회사에서 어떤 업무부터 바꾸면 좋을지 구체적으로 정리해 드립니다.</p>
+    <p style="margin:0 0 8px"><b>결과를 바탕으로 30분 무료 상담을 받아 보세요.</b><br>어떤 업무부터 시스템으로 바꾸면 좋을지 구체적으로 정리해 드립니다.</p>
     <p style="margin:0"><a href="${SITE}/contact" style="color:#C21010">상담 신청하기</a> · 010-5023-5369 · info@nexus-ai-sol.com</p>
   </div>
   <p style="font-size:12px;color:#8A8683;margin-top:28px">Nexus Solution · 경기도 성남시 분당구 판교대장로2길 4, 102-408<br>이 메일은 ${SITE} 에서 진단 리포트를 요청하셔서 발송되었습니다.</p>
@@ -117,7 +117,7 @@ app.http("lead", {
       ["유입 페이지", lead.page],
     ].filter(([, v]) => v);
     if (result) {
-      rows.push(["진단 결과", `${result.type.title} · 종합 ${result.overall}% (기회 ${result.opportunity}% / 준비도 ${result.readiness}%)`]);
+      rows.push(["진단 결과", `${result.type.title} · 종합 ${result.overall}% (시스템화 효과 ${result.opportunity}% / 데이터 준비도 ${result.readiness}%)`]);
       for (const q of questions) rows.push([`  ${q.area}`, q.options[body.answers[q.id]]]);
     }
     const notify = `<table style="border-collapse:collapse;font-family:sans-serif;font-size:14px">${rows
@@ -137,7 +137,7 @@ app.http("lead", {
           from,
           to: [lead.email],
           reply_to: to,
-          subject: `[Nexus Solution] ${lead.company} AI 준비도 진단 리포트`,
+          subject: `[Nexus Solution] ${lead.company} 업무 시스템화 진단 리포트`,
           html: reportHtml(result, lead.company),
         });
       }
