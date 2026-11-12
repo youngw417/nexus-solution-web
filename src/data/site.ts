@@ -12,9 +12,9 @@ export const site = {
   address: "경기도 성남시 분당구 판교대장로2길 4, 102-408",
   postcode: "13544",
   // 사업자등록번호 — 채우면 푸터에 표시됩니다. (예: "123-45-67890")
-  bizRegNo: "",
+  bizRegNo: "550-23-01992",
   // 회사 소개서 PDF — public/ 아래에 파일을 넣고 경로를 채우면 다운로드 버튼이 켜집니다.
-  brochure: "",
+  brochure: "/nexus-solution-brochure.pdf",
   // Cal.com 예약 링크 — 채우면 상담 문의 페이지에 예약 버튼이 나타납니다.
   calLink: "",
 };

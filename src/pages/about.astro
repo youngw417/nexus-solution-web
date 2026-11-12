@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import SectionHead from "../components/SectionHead.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { site } from "../data/site";
+import { capabilities, principles } from "../data/content";
 ---
 <Base title="회사 소개" description="Nexus Solution은 회사의 흩어진 데이터를 정리하고, 그 회사에 꼭 맞는 소프트웨어를 만들어 운영까지 맡는 판교 기반 회사입니다.">
   <section class="border-b border-line py-[clamp(56px,9vw,96px)]">
@@ -14,15 +15,18 @@ import { site } from "../data/site";
     </div>
   </section>
 
+  <section class="border-b border-line">
+    <img src="/photos/about-work.jpg" width="1600" height="1200" class="block aspect-[21/9] max-h-[460px] w-full object-cover object-[center_40%]"
+         alt="통창 옆 라운지에서 노트북으로 작업하는 모습" />
+  </section>
+
   <section class="border-b border-line py-16">
     <div class="wrap">
       <SectionHead label="세 가지 역량" title="만드는 것만으로는 업무가 바뀌지 않습니다" />
+      <img src="/illustrations/process-diagram.svg" width="1000" height="340" loading="lazy" class="mt-8 block h-auto w-full border border-line"
+           alt="데이터 정리에서 맞춤 개발, 운영과 개선으로 이어지고, 운영하며 다시 개발로 돌아가 계속 개선하는 흐름" />
       <div class="grid-rule mt-8 md:grid-cols-3">
-        {[
-          ["데이터", "Data", "엑셀과 문서에 흩어진 데이터를 하나의 클라우드 데이터베이스로 정리합니다. 모든 시스템은 정리된 데이터에서 시작합니다."],
-          ["개발", "Engineering", "업무 흐름에 맞춘 웹 · 모바일 소프트웨어를 직접 만듭니다. 필요하면 Odoo 같은 검증된 오픈소스와 AI를 함께 씁니다."],
-          ["운영", "Operations", "만들고 끝내지 않습니다. 호스팅과 유지보수를 맡고, 쓰면서 나오는 요청을 계속 반영합니다."],
-        ].map(([k, en, body]) => (
+        {capabilities.map(({ name: k, en, body }) => (
           <div class="p-6">
             <span class="font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">{en}</span>
             <h3 class="h3 mt-1 mb-2 !text-[20px]">{k}</h3>
@@ -37,14 +41,9 @@ import { site } from "../data/site";
     <div class="wrap grid gap-10 md:grid-cols-2">
       <SectionHead label="원칙" title="이렇게 일합니다" />
       <ol class="m-0 grid list-none gap-6 p-0">
-        {[
-          ["작게 시작합니다", "가장 불편한 업무 하나부터 시스템으로 바꾸고, 효과를 확인한 뒤 넓힙니다. 처음부터 큰 계약을 권하지 않습니다."],
-          ["필요한 것만 만듭니다", "좋은 도구가 이미 있으면 그것을 맞춰 쓰도록 권합니다. 새로 만드는 것은 회사에 꼭 필요한 부분만입니다."],
-          ["데이터는 고객의 것입니다", "모든 데이터는 고객사 소유로 두고, 언제든 내려받을 수 있게 만듭니다. 접근 권한과 백업을 기본으로 설계합니다."],
-          ["가까이 있습니다", "판교에 있어 판교·분당 기업은 온사이트로 빠르게 찾아갑니다."],
-        ].map(([t, b], i) => (
+        {principles.map(({ title: t, body: b }, i) => (
           <li class="grid grid-cols-[2.5em_1fr] gap-3">
-            <span class="font-mono text-[13px] text-red-ink">{String(i + 1).padStart(2, "0")}</span>
+            <span class="font-mono text-[13px] text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
             <span><b class="mb-1 block font-display text-[16.5px]">{t}</b><span class="text-[14.5px] text-ink-2">{b}</span></span>
           </li>
         ))}

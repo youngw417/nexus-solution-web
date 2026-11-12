@@ -16,10 +16,10 @@ import { site } from "../data/site";
   <section class="border-b border-line py-16">
     <div class="wrap grid gap-10 lg:grid-cols-[1fr_1.2fr]">
       <div>
-        <div class="border border-line border-t-2 border-t-red bg-surface p-6">
-          <p class="mb-1 font-mono text-[11px] tracking-[.12em] text-red-ink uppercase">PDF</p>
+        <div class="border border-line border-t-2 border-t-accent bg-surface p-6">
+          <p class="mb-1 font-mono text-[11px] tracking-[.12em] text-accent-ink uppercase">PDF</p>
           <h2 class="h3 mb-2 !text-[21px]">Nexus Solution 회사 소개서</h2>
-          <ul class="mb-5 grid gap-1.5 list-disc pl-5 text-[14.5px] text-ink-2 marker:text-red">
+          <ul class="mb-5 grid gap-1.5 list-disc pl-5 text-[14.5px] text-ink-2 marker:text-accent">
             <li>회사 소개와 일하는 방식</li>
             <li>서비스 5종 구성과 진행 기간</li>
             <li>단계별 산출물 예시</li>
@@ -34,10 +34,21 @@ import { site } from "../data/site";
         <ul class="grid-rule list-none p-0">
           <li><a href="/diagnosis" class="block p-5 no-underline hover:!bg-ground"><b class="block font-display text-ink">시스템화 진단 결과 리포트</b><span class="text-[14px] text-ink-2">3분 진단 후 상세 리포트를 받아 보고 자료로 쓰실 수 있습니다.</span></a></li>
           <li><a href="/cases" class="block p-5 no-underline hover:!bg-ground"><b class="block font-display text-ink">사례 · 업종별 적용</b><span class="text-[14px] text-ink-2">현장 양식, 사진 증빙, ERP 도입 사례와 업종별 예시.</span></a></li>
-          <li><a href="/services" class="block p-5 no-underline hover:!bg-ground"><b class="block font-display text-ink">서비스 구성과 비용</b><span class="text-[14px] text-ink-2">결재 시 항목명과 산출물까지 정리했습니다.</span></a></li>
+          <li><a href="/services" class="block p-5 no-underline hover:!bg-ground"><b class="block font-display text-ink">서비스 구성과 진행 방식</b><span class="text-[14px] text-ink-2">결재 시 항목명과 산출물까지 정리했습니다.</span></a></li>
         </ul>
       </div>
 
+      {site.brochure && (
+        <a href={site.brochure} download class="group relative block aspect-[5/4] self-start no-underline" aria-label="회사 소개서 PDF 내려받기">
+          <img src="/brochure-preview/page-10.jpg" width="579" height="819" alt="" loading="lazy"
+               class="absolute top-[8%] right-[4%] w-[46%] rotate-[5deg] border border-line shadow-[0_18px_40px_-18px_rgba(0,0,0,.35)] transition-transform group-hover:rotate-[7deg]" />
+          <img src="/brochure-preview/page-7.jpg" width="579" height="819" alt="" loading="lazy"
+               class="absolute top-[4%] right-[24%] w-[46%] -rotate-[2deg] border border-line shadow-[0_18px_40px_-18px_rgba(0,0,0,.35)] transition-transform group-hover:-rotate-[4deg]" />
+          <img src="/brochure-preview/page-1.jpg" width="579" height="819" alt="회사 소개서 표지 미리보기"
+               class="absolute top-0 left-[2%] w-[46%] -rotate-[6deg] border border-line shadow-[0_18px_40px_-18px_rgba(0,0,0,.35)] transition-transform group-hover:-rotate-[8deg]" />
+          <span class="absolute bottom-0 left-[2%] font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase group-hover:text-accent-ink">A4 · 12쪽 · 미리보기 ↓</span>
+        </a>
+      )}
       {!site.brochure && (
         <div>
           <h2 class="h3 mb-4">소개서 요청</h2>

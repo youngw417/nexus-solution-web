@@ -7,10 +7,10 @@ type Step = "intro" | "quiz" | "result";
 const sizes = ["10명 미만", "10~49명", "50~299명", "300명 이상"];
 const industries = ["제조", "교육기관 · 학원", "유통 · 도매", "회계 · 세무 · 노무", "건설 · 부동산", "서비스 · 기타"];
 
-function Bar({ value, tone = "red", label }: { value: number; tone?: "red" | "ink"; label: string }) {
+function Bar({ value, tone = "accent", label }: { value: number; tone?: "accent" | "ink"; label: string }) {
   return (
     <div className="h-2.5 bg-surface-2" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={value} aria-label={label}>
-      <div className={`h-full transition-[width] duration-700 ${tone === "red" ? "bg-red" : "bg-ink"}`} style={{ width: `${value}%` }} />
+      <div className={`h-full transition-[width] duration-700 ${tone === "accent" ? "bg-accent" : "bg-ink"}`} style={{ width: `${value}%` }} />
     </div>
   );
 }
@@ -35,6 +35,7 @@ export default function Diagnosis() {
 
   if (step === "intro") {
     return (
+      <div className="grid gap-6">
       <div className="border border-line bg-surface p-6 sm:p-10">
         <ul className="mb-8 grid gap-4 p-0 sm:grid-cols-3" style={{ listStyle: "none" }}>
           {[
@@ -42,13 +43,19 @@ export default function Diagnosis() {
             ["두 가지 축", "시스템화 효과와 데이터 준비도를 함께 봅니다."],
             ["즉시 결과", "점수와 유형, 추천 첫 단계를 바로 보여 드립니다."],
           ].map(([t, b]) => (
-            <li key={t} className="border-t-2 border-red pt-3">
+            <li key={t} className="border-t-2 border-accent pt-3">
               <b className="block font-display text-[16px]">{t}</b>
               <span className="text-[14px] text-ink-2">{b}</span>
             </li>
           ))}
         </ul>
         <button type="button" className="btn btn-primary cursor-pointer" onClick={() => setStep("quiz")}>진단 시작하기</button>
+      </div>
+      <figure className="m-0">
+        <img src="/illustrations/diagnosis-result.svg" width={640} height={440} className="block h-auto w-full border border-line"
+             alt="진단 결과 화면 예시: 종합 점수와 시스템화 효과, 데이터 준비도 막대, 결과 유형, 추천 첫 단계, 상세 리포트 메일 발송" />
+        <figcaption className="mt-2 text-[12.5px] text-ink-3">결과 화면 예시입니다. 실제 점수와 유형은 응답에 따라 달라집니다.</figcaption>
+      </figure>
       </div>
     );
   }
@@ -62,7 +69,7 @@ export default function Diagnosis() {
           <span>{axisLabel[q.axis]} · {q.area}</span>
           <span>{i + 1} / {questions.length}</span>
         </div>
-        <div className="mb-8 h-1 bg-surface-2"><div className="h-full bg-red transition-[width]" style={{ width: `${progress}%` }} /></div>
+        <div className="mb-8 h-1 bg-surface-2"><div className="h-full bg-accent transition-[width]" style={{ width: `${progress}%` }} /></div>
 
         <fieldset className="m-0 border-0 p-0">
           <legend className="contents">
@@ -78,10 +85,10 @@ export default function Diagnosis() {
                   aria-pressed={selected}
                   onClick={() => pick(q.id, v)}
                   className={`flex cursor-pointer items-center gap-3 border px-4 py-3.5 text-left text-[15.5px] transition-colors ${
-                    selected ? "border-red bg-red-soft text-ink" : "border-line-2 bg-surface text-ink hover:border-red"
+                    selected ? "border-accent bg-accent-soft text-ink" : "border-line-2 bg-surface text-ink hover:border-accent"
                   }`}
                 >
-                  <span className={`grid h-6 w-6 flex-none place-items-center border font-mono text-[11px] ${selected ? "border-red bg-red text-white" : "border-line-2 text-ink-3"}`}>
+                  <span className={`grid h-6 w-6 flex-none place-items-center border font-mono text-[11px] ${selected ? "border-btn bg-btn text-btn-ink" : "border-line-2 text-ink-3"}`}>
                     {String.fromCharCode(65 + v)}
                   </span>
                   {opt}
@@ -94,14 +101,14 @@ export default function Diagnosis() {
         <div className="mt-8 flex items-center justify-between">
           <button
             type="button"
-            className="cursor-pointer border-0 bg-transparent p-0 font-display text-[14px] font-bold text-ink-2 hover:text-red-ink disabled:invisible"
+            className="cursor-pointer border-0 bg-transparent p-0 font-display text-[14px] font-bold text-ink-2 hover:text-accent-ink disabled:invisible"
             onClick={() => setI(i - 1)}
             disabled={i === 0}
           >
             ← 이전 문항
           </button>
           {answers[q.id] !== undefined && i < questions.length - 1 && (
-            <button type="button" className="cursor-pointer border-0 bg-transparent p-0 font-display text-[14px] font-bold text-ink-2 hover:text-red-ink" onClick={() => setI(i + 1)}>
+            <button type="button" className="cursor-pointer border-0 bg-transparent p-0 font-display text-[14px] font-bold text-ink-2 hover:text-accent-ink" onClick={() => setI(i + 1)}>
               다음 →
             </button>
           )}
@@ -141,31 +148,31 @@ function Result({ answers, headingRef, onRestart }: { answers: Answers; headingR
 
         <div className="grid-rule md:grid-cols-[1.4fr_1fr]">
           <div className="p-5">
-            <p className="mb-3 font-mono text-[11px] tracking-[.12em] text-red-ink uppercase">추천 첫 단계</p>
-            <ol className="m-0 grid gap-2 list-decimal pl-5 text-[14.5px] marker:text-red">
+            <p className="mb-3 font-mono text-[11px] tracking-[.12em] text-accent-ink uppercase">추천 첫 단계</p>
+            <ol className="m-0 grid gap-2 list-decimal pl-5 text-[14.5px] marker:text-accent">
               {r.type.actions.map((a: string) => <li key={a}>{a}</li>)}
             </ol>
           </div>
           <div className="flex flex-col gap-2 p-5">
             <p className="m-0 font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">맞는 서비스</p>
             <b className="font-display text-[16px]">{r.type.service}</b>
-            <a href={r.type.serviceHref} className="mt-auto font-display text-[14px] font-bold text-red-ink">자세히 보기 →</a>
+            <a href={r.type.serviceHref} className="mt-auto font-display text-[14px] font-bold text-accent-ink">자세히 보기 →</a>
           </div>
         </div>
 
         <details className="mt-6 group">
-          <summary className="cursor-pointer font-display text-[14px] font-bold text-ink-2 hover:text-red-ink">영역별 점수 보기</summary>
+          <summary className="cursor-pointer font-display text-[14px] font-bold text-ink-2 hover:text-accent-ink">영역별 점수 보기</summary>
           <div className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
             {r.areas.map((a: { id: string; axis: "opportunity" | "readiness"; area: string; value: number }) => (
               <div key={a.id}>
                 <div className="mb-1 flex justify-between text-[13px] text-ink-2"><span>{a.area}</span><span className="font-mono">{a.value}/3</span></div>
-                <Bar value={(a.value / 3) * 100} tone={a.axis === "opportunity" ? "red" : "ink"} label={a.area} />
+                <Bar value={(a.value / 3) * 100} tone={a.axis === "opportunity" ? "accent" : "ink"} label={a.area} />
               </div>
             ))}
           </div>
         </details>
 
-        <button type="button" onClick={onRestart} className="mt-6 cursor-pointer border-0 bg-transparent p-0 text-[13px] text-ink-3 underline hover:text-red-ink">다시 진단하기</button>
+        <button type="button" onClick={onRestart} className="mt-6 cursor-pointer border-0 bg-transparent p-0 text-[13px] text-ink-3 underline hover:text-accent-ink">다시 진단하기</button>
       </div>
 
       <ReportForm answers={answers} />
@@ -199,7 +206,7 @@ function ReportForm({ answers }: { answers: Answers }) {
 
   if (state === "done") {
     return (
-      <div className="border border-line border-t-2 border-t-red bg-surface p-6 sm:p-8">
+      <div className="border border-line border-t-2 border-t-accent bg-surface p-6 sm:p-8">
         <p className="h3 mb-2">리포트를 보내 드렸습니다</p>
         <p className="m-0 text-ink-2">{sentTo}로 상세 리포트를 발송했습니다. 몇 분 안에 도착하지 않으면 스팸함을 확인해 주세요.</p>
       </div>
@@ -207,8 +214,8 @@ function ReportForm({ answers }: { answers: Answers }) {
   }
 
   return (
-    <form onSubmit={submit} noValidate className="border border-line border-t-2 border-t-red bg-surface p-6 sm:p-8">
-      <p className="mb-1 font-mono text-[11px] tracking-[.12em] text-red-ink uppercase">무료 상세 리포트</p>
+    <form onSubmit={submit} noValidate className="border border-line border-t-2 border-t-accent bg-surface p-6 sm:p-8">
+      <p className="mb-1 font-mono text-[11px] tracking-[.12em] text-accent-ink uppercase">무료 상세 리포트</p>
       <h2 className="h3 mb-2 !text-[21px]">상세 리포트를 메일로 받으시겠습니까?</h2>
       <p className="mb-6 text-[14.5px] text-ink-2">영역별 해설과 우리 회사에 맞는 시스템화 순서를 정리해 보내 드립니다. <b className="font-medium text-ink">내부 보고 자료로 그대로 쓰실 수 있습니다.</b></p>
       <div className="grid gap-5 sm:grid-cols-2">
@@ -225,7 +232,7 @@ function ReportForm({ answers }: { answers: Answers }) {
         </div>
         <div className="hidden" aria-hidden="true"><input name="website" tabIndex={-1} autoComplete="off" /></div>
         <label className="flex items-start gap-2.5 text-[13.5px] text-ink-2 sm:col-span-2">
-          <input type="checkbox" name="consent" required className="mt-1 h-4 w-4 flex-none accent-[var(--red)]" />
+          <input type="checkbox" name="consent" required className="mt-1 h-4 w-4 flex-none accent-[var(--accent)]" />
           <span>리포트 발송과 후속 상담 안내를 위한 개인정보(회사명, 성함, 이메일) 수집·이용에 동의합니다. 수집한 정보는 해당 목적으로만 사용하며 1년간 보관합니다.</span>
         </label>
       </div>
@@ -234,7 +241,7 @@ function ReportForm({ answers }: { answers: Answers }) {
           {state === "sending" ? "보내는 중…" : "리포트 받기"}
         </button>
         {state === "error" && (
-          <p className="m-0 text-[13.5px] text-red-ink" role="alert">전송에 실패했습니다. 잠시 후 다시 시도하시거나 info@nexus-ai-sol.com으로 연락 주세요.</p>
+          <p className="m-0 text-[13.5px] text-accent-ink" role="alert">전송에 실패했습니다. 잠시 후 다시 시도하시거나 info@nexus-ai-sol.com으로 연락 주세요.</p>
         )}
       </div>
     </form>

@@ -15,11 +15,11 @@ import { site } from "../data/site";
         <dl class="grid-rule mt-8">
           <div class="p-5">
             <dt class="font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">전화</dt>
-            <dd class="m-0"><a href={site.phoneHref} class="font-display text-[21px] font-bold tracking-[-.02em] text-ink no-underline hover:text-red-ink">{site.phone}</a></dd>
+            <dd class="m-0"><a href={site.phoneHref} class="font-display text-[21px] font-bold tracking-[-.02em] text-ink no-underline hover:text-accent-ink">{site.phone}</a></dd>
           </div>
           <div class="p-5">
             <dt class="font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">이메일</dt>
-            <dd class="m-0"><a href={`mailto:${site.email}`} class="font-display text-[21px] font-bold tracking-[-.02em] text-ink no-underline hover:text-red-ink">{site.email}</a></dd>
+            <dd class="m-0"><a href={`mailto:${site.email}`} class="font-display text-[21px] font-bold tracking-[-.02em] text-ink no-underline hover:text-accent-ink">{site.email}</a></dd>
           </div>
           <div class="p-5">
             <dt class="font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">주소</dt>
@@ -34,10 +34,12 @@ import { site } from "../data/site";
         </dl>
 
         <ol class="mt-8 grid list-none gap-3 p-0 text-[14px] text-ink-2">
-          <li><b class="mr-2 font-mono text-red-ink">1</b>문의를 남기시면 영업일 1일 안에 연락드립니다.</li>
-          <li><b class="mr-2 font-mono text-red-ink">2</b>30분 상담(온라인 또는 방문)으로 현재 상황을 듣습니다.</li>
-          <li><b class="mr-2 font-mono text-red-ink">3</b>회사에 맞는 진행 방식과 견적을 정리해 보내 드립니다.</li>
+          <li><b class="mr-2 font-mono text-accent-ink">1</b>문의를 남기시면 영업일 1일 안에 연락드립니다.</li>
+          <li><b class="mr-2 font-mono text-accent-ink">2</b>30분 상담(온라인 또는 방문)으로 현재 상황을 듣습니다.</li>
+          <li><b class="mr-2 font-mono text-accent-ink">3</b>회사에 맞는 진행 방식과 견적을 정리해 보내 드립니다.</li>
         </ol>
+        <img src="/photos/consultation.jpg" width="1280" height="960" loading="lazy" class="mt-8 block aspect-[16/10] w-full border border-line object-cover"
+             alt="통유리 너머로 도시가 내려다보이는 고층 건물 전망 회랑" />
       </div>
 
       <ContactForm />

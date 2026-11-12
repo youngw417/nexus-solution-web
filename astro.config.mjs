@@ -7,6 +7,6 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://www.nexus-ai-sol.com",
   trailingSlash: "ignore",
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap({ filter: (page) => !page.includes("/brochure") })],
   vite: { plugins: [tailwindcss()] },
 });

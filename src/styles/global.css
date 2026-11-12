@@ -4,35 +4,47 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
-  --ground: #F4F4F4;
+  /* 색 구성: Figma 7번 Urban slate
+     #E9E6E7 밝은 회색 · #5E5653 짙은 회갈색 · #7B7F8A 슬레이트 회색 · #AB978C 토프 · #6B7C98 슬레이트 블루
+     바탕은 밝은 회색, 띠와 버튼은 회갈색, 선·표시는 슬레이트 블루, 강조 글자는 한 단계 진한 블루. */
+  --ground: #E9E6E7;
   --surface: #FFFFFF;
-  --surface-2: #EAEAEA;
-  --ink: #111111;
-  --ink-2: #56534F;
-  --ink-3: #8A8683;
-  --line: #DAD7D4;
-  --line-2: #BFBCB9;
-  --red: #EE1111;
-  --red-ink: #C21010;
-  --red-soft: #FBE3E1;
-  --mark-wash: rgba(17, 17, 17, .045);
+  --surface-2: #DEDADA;
+  --ink: #2A2523;
+  --ink-2: #5E5653;
+  --ink-3: #67636A;
+  --line: #D3CDCB;
+  --line-2: #B9B1AD;
+  --band: #5E5653;
+  --accent: #6B7C98;      /* 선, 막대, 목록 표시 */
+  --accent-ink: #4F5F7A;  /* 강조 글자 (바탕 대비 5.2:1) */
+  --accent-soft: #E3E8F0; /* 옅은 블루 바탕 */
+  --btn: #5E5653;         /* 기본 버튼 */
+  --btn-ink: #FFFFFF;
+  --btn-hover: #4A4340;
+  --mark-wash: rgba(42, 37, 35, .045);
   color-scheme: light;
 }
 :root[data-theme="dark"] {
-  --ground: #101010;
-  --surface: #1A1918;
-  --surface-2: #242322;
-  --ink: #EFEDEB;
-  --ink-2: #AAA6A2;
-  --ink-3: #7B7773;
-  --line: #2E2C2A;
-  --line-2: #413E3C;
-  --red: #FF5A4D;
-  --red-ink: #FF7A6E;
-  --red-soft: #3A1714;
+  --ground: #1E1B1A;
+  --surface: #282423;
+  --surface-2: #322D2B;
+  --ink: #E9E6E7;
+  --ink-2: #B5ADA9;
+  --ink-3: #8F8A88;
+  --line: #3A3533;
+  --line-2: #4D4745;
+  --accent: #9DB0CF;
+  --accent-ink: #B4C3DC;
+  --accent-soft: #252C38;
+  --btn: #9DB0CF;
+  --btn-ink: #1E1B1A;
+  --btn-hover: #B4C3DC;
   --mark-wash: rgba(255, 255, 255, .05);
   color-scheme: dark;
 }
+/* 테마와 상관없이 회갈색 띠(홈 상단, 상담 띠, 소개서 마지막 장)에서는 밝은 블루를 씁니다 */
+.on-dark { --accent: #C9D2E1; --accent-ink: #C9D2E1; --btn: #E9E6E7; --btn-ink: #5E5653; --btn-hover: #FFFFFF; }
 
 @theme inline {
   --color-ground: var(--ground);
@@ -43,9 +55,12 @@
   --color-ink-3: var(--ink-3);
   --color-line: var(--line);
   --color-line-2: var(--line-2);
-  --color-red: var(--red);
-  --color-red-ink: var(--red-ink);
-  --color-red-soft: var(--red-soft);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-band: var(--band);
+  --color-btn: var(--btn);
+  --color-btn-ink: var(--btn-ink);
   --font-display: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
@@ -65,10 +80,10 @@
   h1, h2, h3, h4 { font-family: var(--font-display); text-wrap: balance; }
   a:focus-visible, button:focus-visible, input:focus-visible,
   select:focus-visible, textarea:focus-visible, summary:focus-visible {
-    outline: 2px solid var(--red);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
-  ::selection { background: var(--red-soft); }
+  ::selection { background: var(--accent-soft); }
 }
 
 @layer components {
@@ -76,10 +91,10 @@
 
   /* 로고 E의 빨간 세 줄 — 섹션 마커로 반복합니다 */
   .bars { display: inline-flex; flex-direction: column; gap: 2.5px; width: 15px; margin-right: 9px; flex: none; }
-  .bars i { display: block; height: 2.5px; background: var(--red); }
+  .bars i { display: block; height: 2.5px; background: var(--accent); }
 
   .eyebrow {
-    @apply mb-4 flex items-center font-mono text-[11.5px] font-medium tracking-[.14em] uppercase text-red-ink;
+    @apply mb-4 flex items-center font-mono text-[11.5px] font-medium tracking-[.14em] uppercase text-accent-ink;
   }
   .sec-label {
     @apply mb-3 flex items-center font-mono text-[11.5px] tracking-[.14em] uppercase text-ink-3;
@@ -92,9 +107,8 @@
   .btn {
     @apply inline-flex items-center justify-center gap-2 border px-5 py-3 font-display text-[15px] font-bold tracking-[-.01em] no-underline transition-colors;
   }
-  .btn-primary { @apply border-red bg-red text-white hover:border-red-ink hover:bg-red-ink; }
-  :root[data-theme="dark"] .btn-primary { color: #1A0806; }
-  .btn-ghost { @apply border-line-2 bg-surface text-ink hover:border-red hover:text-red-ink; }
+  .btn-primary { @apply border-btn bg-btn text-btn-ink hover:border-[var(--btn-hover)] hover:bg-[var(--btn-hover)]; }
+  .btn-ghost { @apply border-line-2 bg-surface text-ink hover:border-accent hover:text-accent-ink; }
 
   /* 1px 선으로 나뉜 격자 — 명함 톤 */
   .grid-rule { @apply grid gap-px border border-line bg-line; }
@@ -105,7 +119,7 @@
   .input {
     @apply w-full border border-line-2 bg-surface px-3.5 py-2.5 text-[15px] text-ink placeholder:text-ink-3;
   }
-  .input:focus { outline: 2px solid var(--red); outline-offset: 0; border-color: var(--red); }
+  .input:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
 
   .prose-nx p { @apply mb-4; }
   .prose-nx strong { @apply font-medium text-ink; }

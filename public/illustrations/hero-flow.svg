@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="흩어진 데이터가 하나의 흐름으로 모이는 추상 그래픽">
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#6C6461"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#C9D2E1" stop-opacity="0"/>
+      <stop offset=".25" stop-color="#C9D2E1" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#C9D2E1"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".72" cy=".42" r=".55">
+      <stop offset="0" stop-color="#C9D2E1" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#C9D2E1" stop-opacity="0"/>
+    </radialGradient>
+    <!-- 로고 심볼의 지그재그를 화면 폭으로 늘린 선 -->
+    <path id="wave" d="M-40 540 L250 250 Q300 200 352 252 L470 370 Q520 420 572 368 L790 150 Q840 100 892 152 L1010 270 Q1060 320 1112 268 L1260 120"/>
+  </defs>
+
+  <rect width="1200" height="600" fill="#5E5653"/>
+  <rect width="1200" height="600" fill="url(#dots)"/>
+  <rect width="1200" height="600" fill="url(#glow)"/>
+
+  <!-- 잔상 선 -->
+  <g fill="none" stroke="#C9D2E1" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#wave" transform="translate(0 132)" stroke-width="1" opacity=".08"/>
+    <use href="#wave" transform="translate(0 110)" stroke-width="1" opacity=".12"/>
+    <use href="#wave" transform="translate(0 88)" stroke-width="1" opacity=".16"/>
+    <use href="#wave" transform="translate(0 66)" stroke-width="1.2" opacity=".22"/>
+    <use href="#wave" transform="translate(0 44)" stroke-width="1.4" opacity=".32"/>
+    <use href="#wave" transform="translate(0 22)" stroke-width="1.6" opacity=".45"/>
+  </g>
+  <!-- 주 선 -->
+  <use href="#wave" fill="none" stroke="url(#fade)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 흩어진 데이터 조각: 왼쪽 엑셀 파일들 -->
+  <g font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#BDB5B1">
+    <g transform="translate(70 120)">
+      <rect width="132" height="34" rx="2" fill="#514A47" stroke="#7A716D"/>
+      <rect x="10" y="10" width="14" height="14" rx="1" fill="#6C6461"/>
+      <text x="32" y="21.5">주문_최종.xlsx</text>
+    </g>
+    <g transform="translate(36 186)" opacity=".8">
+      <rect width="150" height="34" rx="2" fill="#514A47" stroke="#7A716D"/>
+      <rect x="10" y="10" width="14" height="14" rx="1" fill="#6C6461"/>
+      <text x="32" y="21.5">재고(수정2).xlsx</text>
+    </g>
+    <g transform="translate(24 252)" opacity=".6">
+      <rect width="138" height="34" rx="2" fill="#514A47" stroke="#7A716D"/>
+      <rect x="10" y="10" width="14" height="14" rx="1" fill="#6C6461"/>
+      <text x="32" y="21.5">거래처_김대리.xlsx</text>
+    </g>
+    <g transform="translate(150 60)" opacity=".45">
+      <rect width="118" height="34" rx="2" fill="#514A47" stroke="#7A716D"/>
+      <rect x="10" y="10" width="14" height="14" rx="1" fill="#6C6461"/>
+      <text x="32" y="21.5">점검표.xlsx</text>
+    </g>
+  </g>
+
+  <!-- 흐름 위의 데이터 지점 -->
+  <g fill="#5E5653" stroke="#C9D2E1" stroke-width="3">
+    <circle cx="352" cy="252" r="7"/>
+    <circle cx="572" cy="368" r="7"/>
+    <circle cx="892" cy="152" r="7"/>
+  </g>
+
+  <!-- 정리된 결과: 오른쪽 대시보드 카드 -->
+  <g font-family="'Gothic A1', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+    <g transform="translate(900 330)">
+      <rect width="236" height="176" rx="3" fill="#514A47" stroke="#7A716D"/>
+      <rect width="236" height="3" fill="#C9D2E1"/>
+      <text x="18" y="32" font-size="12" fill="#D9D3D0" font-family="'IBM Plex Mono', ui-monospace, monospace" letter-spacing="1">이번 달 주문</text>
+      <text x="18" y="70" font-size="32" font-weight="800" fill="#F0F0F0">1,284</text>
+      <text x="124" y="70" font-size="13" font-weight="700" fill="#C9D2E1">▲ 12%</text>
+      <g fill="#7A716D">
+        <rect x="18" y="122" width="16" height="36"/>
+        <rect x="42" y="110" width="16" height="48"/>
+        <rect x="66" y="128" width="16" height="30"/>
+        <rect x="90" y="102" width="16" height="56"/>
+        <rect x="114" y="116" width="16" height="42"/>
+        <rect x="138" y="96" width="16" height="62"/>
+      </g>
+      <rect x="162" y="84" width="16" height="74" fill="#C9D2E1"/>
+      <rect x="18" y="158" width="200" height="1" fill="#6C6461"/>
+    </g>
+    <g transform="translate(1006 70)">
+      <rect width="166" height="62" rx="3" fill="#514A47" stroke="#7A716D"/>
+      <circle cx="24" cy="31" r="9" fill="none" stroke="#C9D2E1" stroke-width="2"/>
+      <path d="M19.5 31 l3 3 l6 -6" fill="none" stroke="#C9D2E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="44" y="27" font-size="12.5" font-weight="700" fill="#F0F0F0">현장 점검 완료</text>
+      <text x="44" y="45" font-size="11" fill="#BDB5B1" font-family="'IBM Plex Mono', ui-monospace, monospace">38 / 40 · 자동 보고</text>
+    </g>
+  </g>
+</svg>

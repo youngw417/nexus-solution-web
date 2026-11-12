@@ -13,22 +13,22 @@ export type Service = {
   role: string;
   name: string;
   budget: string; // 결재 문서에 쓰기 좋은 이름
-  price: string;
   format: string[];
   includes: string[];
   deliverables: string;
   fit: string;
   note?: string;
+  image: string; // public/illustrations/ 아래 예시 그림
 };
 
-// 가격은 초안입니다. 원가와 경쟁사 견적을 확인한 뒤 조정하세요.
+// 가격은 사이트와 소개서에 싣지 않습니다. 견적은 상담 후 회사별로 드립니다.
 export const services: Service[] = [
   {
     id: "assess",
+    image: "/illustrations/excel-to-db.svg",
     role: "진입",
     name: "데이터 정리 진단",
     budget: "업무 데이터 현황 진단 · 시스템화 계획 수립",
-    price: "300만 ~ 600만원 (고정가)",
     format: ["2~3주", "부서별 인터뷰", "실제 엑셀 · 문서 분석"],
     includes: [
       "흩어진 데이터 현황 지도",
@@ -42,10 +42,10 @@ export const services: Service[] = [
   },
   {
     id: "build",
+    image: "/illustrations/custom-app.svg",
     role: "핵심",
     name: "맞춤 업무 소프트웨어 개발",
     budget: "업무 시스템 구축 · 디지털 전환(DX)",
-    price: "범위에 따라 협의 (소규모 2,000만원~)",
     format: ["6주~", "2주 단위 시연", "실제 데이터로 테스트"],
     includes: [
       "기존 엑셀 데이터 이전",
@@ -60,10 +60,10 @@ export const services: Service[] = [
   },
   {
     id: "run",
+    image: "/illustrations/ops-report.svg",
     role: "운영",
     name: "운영 · 개선 구독",
     budget: "시스템 유지보수 · 운영 지원",
-    price: "월 50만 ~ 300만원 (규모별 3단계)",
     format: ["월 단위 계약", "월간 운영 리포트", "정기 개선 회의"],
     includes: [
       "클라우드 호스팅 · 백업",
@@ -76,10 +76,10 @@ export const services: Service[] = [
   },
   {
     id: "integrate",
+    image: "/illustrations/integrate.svg",
     role: "선택",
     name: "기존 솔루션 연동 · 맞춤화",
     budget: "기존 시스템 연동 · 커스터마이징",
-    price: "범위에 따라 협의",
     format: ["범위에 따라 4주~", "기존 시스템 현황 검토", "단계별 시연"],
     includes: [
       "Odoo 등 오픈소스 ERP · 회계 도입과 맞춤화",
@@ -93,10 +93,10 @@ export const services: Service[] = [
   },
   {
     id: "ai",
+    image: "/illustrations/ai-extract.svg",
     role: "옵션",
     name: "AI 부가 서비스",
     budget: "AI 기능 도입 · 업무 자동화",
-    price: "구축 · 연동에 추가하는 옵션",
     format: ["구축과 함께 또는 별도", "사내 사용 기준 함께 수립"],
     includes: [
       "영수증 · 계약서 · 양식 자동 추출",
@@ -119,11 +119,13 @@ export type Case = {
   after: string[];
   features: string[];
   fitsFor: string;
+  image: string;
 };
 
 export const cases: Case[] = [
   {
     id: "field-form",
+    image: "/illustrations/field-form.svg",
     label: "현장 양식 디지털화",
     title: "종이 · 엑셀 점검 양식을 모바일 입력과 자동 보고서로",
     summary: "현장에서 종이나 엑셀로 작성하던 점검·보고 양식을 모바일 앱으로 옮기고, 입력하는 순간 데이터베이스에 쌓이도록 바꿨습니다.",
@@ -134,6 +136,7 @@ export const cases: Case[] = [
   },
   {
     id: "photo-evidence",
+    image: "/illustrations/photo-evidence.svg",
     label: "현장 사진 증빙",
     title: "촬영과 동시에 위치 · 시간 · 작업 정보를 자동으로 기록",
     summary: "메신저로 주고받던 현장 사진을 작업 건별로 자동 정리하고, 언제 어디서 무엇을 찍었는지 함께 남도록 만들었습니다.",
@@ -144,6 +147,7 @@ export const cases: Case[] = [
   },
   {
     id: "erp",
+    image: "/illustrations/erp-dashboard.svg",
     label: "오픈소스 ERP 맞춤 도입",
     title: "회계와 재고를 회사 실정에 맞게 하나로",
     summary: "오픈소스 ERP(Odoo)를 회사의 회계 · 재고 업무에 맞게 고쳐 도입하고, 흩어져 있던 엑셀 장부를 옮겼습니다.",
@@ -191,4 +195,18 @@ export const industries: Industry[] = [
     summary: "고객 자료 수집과 증빙 처리에 시간이 많이 드는 회계 · 세무 · 노무 사무소.",
     examples: ["고객 자료 수집 포털", "증빙 자동 추출 (AI)", "업무 진행 현황 관리", "오픈소스 ERP 연동"],
   },
+];
+
+// 회사 소개 페이지와 소개서가 함께 씁니다.
+export const capabilities = [
+  { name: "데이터", en: "Data", body: "엑셀과 문서에 흩어진 데이터를 하나의 클라우드 데이터베이스로 정리합니다. 모든 시스템은 정리된 데이터에서 시작합니다." },
+  { name: "개발", en: "Engineering", body: "업무 흐름에 맞춘 웹 · 모바일 소프트웨어를 직접 만듭니다. 필요하면 Odoo 같은 검증된 오픈소스와 AI를 함께 씁니다." },
+  { name: "운영", en: "Operations", body: "만들고 끝내지 않습니다. 호스팅과 유지보수를 맡고, 쓰면서 나오는 요청을 계속 반영합니다." },
+];
+
+export const principles = [
+  { title: "작게 시작합니다", body: "가장 불편한 업무 하나부터 시스템으로 바꾸고, 효과를 확인한 뒤 넓힙니다. 처음부터 큰 계약을 권하지 않습니다." },
+  { title: "필요한 것만 만듭니다", body: "좋은 도구가 이미 있으면 그것을 맞춰 쓰도록 권합니다. 새로 만드는 것은 회사에 꼭 필요한 부분만입니다." },
+  { title: "데이터는 고객의 것입니다", body: "모든 데이터는 고객사 소유로 두고, 언제든 내려받을 수 있게 만듭니다. 접근 권한과 백업을 기본으로 설계합니다." },
+  { title: "가까이 있습니다", body: "판교에 있어 판교 · 분당 기업은 온사이트로 빠르게 찾아갑니다." },
 ];
