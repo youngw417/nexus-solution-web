@@ -11,6 +11,18 @@ npm run dev      # http://localhost:4321
 npm run build    # astro check + static build into dist/
 ```
 
+Forms post to `/api/lead`, which `npm run dev` alone does not serve (404). To test
+them locally, run the Functions app in a second terminal — the dev server proxies
+`/api` to it:
+
+```sh
+cd api && npm install && func start --port 7071   # needs Azure Functions Core Tools
+```
+
+`api/local.settings.json` (git-ignored) holds local settings. Add `RESEND_API_KEY`
+(and optionally `LEAD_FROM` / `LEAD_TO`) under `Values` to actually send mail;
+without it the API answers 503 and the form shows the "send by email" fallback.
+
 ## Layout
 
 | Path | Purpose |
