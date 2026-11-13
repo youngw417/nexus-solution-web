@@ -61,10 +61,15 @@
   --color-band: var(--band);
   --color-btn: var(--btn);
   --color-btn-ink: var(--btn-ink);
-  --font-display: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-display: "Busan Dandi Gothic", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "Busan Dandi Gothic", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
+
+/* 부산단디고딕 — 부산광역시 제작, 공공누리 제1유형(출처표시). public/fonts 에서 직접 제공합니다.
+   굵기는 L · M · B 세 가지입니다. L 은 본문 크기에서 너무 가늘어, 본문과 강조(400~500)는 M, 제목(700 이상)은 B 로 씁니다. */
+@font-face { font-family: "Busan Dandi Gothic"; font-weight: 400 500; font-style: normal; font-display: swap; src: url("/fonts/BusanDandiGothic-M.woff2") format("woff2"); }
+@font-face { font-family: "Busan Dandi Gothic"; font-weight: 700 900; font-style: normal; font-display: swap; src: url("/fonts/BusanDandiGothic-B.woff2") format("woff2"); }
 
 @layer base {
   html { -webkit-text-size-adjust: 100%; }
