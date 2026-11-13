@@ -1,0 +1,10 @@
+{
+  "name": "nexus-web-api",
+  "private": true,
+  "type": "module",
+  "main": "src/functions/*.js",
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "@azure/functions": "^4.0.0"
+  }
+}

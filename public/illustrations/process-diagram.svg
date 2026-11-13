@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-label="데이터 정리, 맞춤 개발, 운영과 개선이 이어지는 Nexus Solution의 일하는 방식 도식">
+  <style>.d{font-family:'Gothic A1','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-weight:700}.b{font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif}.m{font-family:'IBM Plex Mono',ui-monospace,monospace}</style>
+  <defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#111" flood-opacity=".12"/></filter>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#6B7C98"/></marker></defs>
+  <rect width="1000" height="340" fill="#F3F1F1"/>
+
+  <!-- 개선 루프 -->
+  <path d="M800 64 Q800 26 760 26 H540 Q500 26 500 60" fill="none" stroke="#6B7C98" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+  <rect x="580" y="14" width="140" height="24" rx="12" fill="#F3F1F1"/>
+  <text x="650" y="31" text-anchor="middle" class="m" font-size="11" fill="#6B7C98">쓰면서 계속 개선</text>
+
+  <g filter="url(#sh)">
+    <rect x="40" y="76" width="260" height="220" rx="4" fill="#fff"/>
+    <rect x="370" y="76" width="260" height="220" rx="4" fill="#fff"/>
+    <rect x="700" y="76" width="260" height="220" rx="4" fill="#111"/>
+  </g>
+  <rect x="40" y="76" width="260" height="4" fill="#6B7C98"/><rect x="370" y="76" width="260" height="4" fill="#6B7C98"/><rect x="700" y="76" width="260" height="4" fill="#6B7C98"/>
+
+  <g fill="none" stroke="#111" stroke-width="2.4" marker-end="url(#ar)"><path d="M306 186 H360"/><path d="M636 186 H690"/></g>
+
+  <!-- 01 데이터 -->
+  <text x="64" y="112" class="m" font-size="11" fill="#6B7C98" letter-spacing="1.4">01 · DATA</text>
+  <text x="64" y="142" class="d" font-size="22" fill="#111">데이터 정리</text>
+  <g transform="translate(64 162)">
+    <g fill="#E4E0E0" stroke="#B9B1AD"><rect width="38" height="28" rx="2"/><rect x="8" y="34" width="38" height="28" rx="2"/><rect y="68" width="38" height="28" rx="2"/></g>
+    <path d="M58 48 H84" stroke="#6B7C98" stroke-width="2" marker-end="url(#ar)"/>
+    <g transform="translate(98 12)"><ellipse cx="38" cy="8" rx="38" ry="8" fill="#111"/><path d="M0 8 V64 A38 8 0 0 0 76 64 V8" fill="#111"/><ellipse cx="38" cy="8" rx="38" ry="8" fill="#5E5653"/><path d="M0 28 A38 8 0 0 0 76 28 M0 46 A38 8 0 0 0 76 46" fill="none" stroke="#5E5653" stroke-width="1.5"/></g>
+  </g>
+  <text x="64" y="282" class="b" font-size="12" fill="#5E5653">흩어진 엑셀 → 클라우드 DB</text>
+
+  <!-- 02 개발 -->
+  <text x="394" y="112" class="m" font-size="11" fill="#6B7C98" letter-spacing="1.4">02 · ENGINEERING</text>
+  <text x="394" y="142" class="d" font-size="22" fill="#111">맞춤 개발</text>
+  <g transform="translate(394 160)">
+    <rect width="140" height="90" rx="4" fill="#111"/><rect x="6" y="6" width="128" height="74" fill="#fff"/>
+    <rect x="6" y="6" width="28" height="74" fill="#E4E0E0"/>
+    <g fill="#B9B1AD"><rect x="42" y="16" width="50" height="6"/><rect x="42" y="30" width="84" height="4"/><rect x="42" y="40" width="70" height="4"/><rect x="42" y="50" width="78" height="4"/></g>
+    <rect x="42" y="62" width="34" height="10" fill="#6B7C98"/>
+    <rect x="156" y="20" width="44" height="80" rx="8" fill="#111"/><rect x="160" y="28" width="36" height="64" rx="3" fill="#fff"/>
+    <g fill="#B9B1AD"><rect x="164" y="36" width="28" height="10"/><rect x="164" y="50" width="28" height="10"/></g><rect x="164" y="74" width="28" height="10" fill="#6B7C98"/>
+  </g>
+  <text x="394" y="282" class="b" font-size="12" fill="#5E5653">업무에 맞춘 웹 · 모바일 소프트웨어</text>
+
+  <!-- 03 운영 -->
+  <text x="724" y="112" class="m" font-size="11" fill="#AEBBD1" letter-spacing="1.4">03 · OPERATIONS</text>
+  <text x="724" y="142" class="d" font-size="22" fill="#F0F0F0">운영 · 개선</text>
+  <g transform="translate(724 166)">
+    <path d="M0 60 L24 54 L48 58 L72 46 L96 50 L120 38 L144 42 L168 28 L192 32 L212 22" fill="none" stroke="#AEBBD1" stroke-width="2.4" stroke-linejoin="round"/>
+    <rect y="74" width="212" height="1" fill="#424242"/>
+    <g class="m" font-size="10" fill="#ABABAB"><text y="94">가동률 99.9%</text><text x="212" y="94" text-anchor="end">개선 4건</text></g>
+  </g>
+  <text x="724" y="282" class="b" font-size="12" fill="#ABABAB">호스팅 · 유지보수 · 기능 개선</text>
+</svg>

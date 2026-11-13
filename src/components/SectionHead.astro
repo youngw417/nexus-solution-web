@@ -1,0 +1,13 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  as?: "h1" | "h2";
+}
+const { label, title, as: Tag = "h2" } = Astro.props;
+---
+<div class="max-w-[68ch]">
+  <p class="sec-label"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>{label}</p>
+  <Tag class={Tag === "h1" ? "h1 mb-5" : "h2 mb-4"} set:html={title} />
+  {Astro.slots.has("default") && <div class="lede"><slot /></div>}
+</div>

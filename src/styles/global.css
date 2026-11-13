@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* 기본은 밝은 화면. 방문자가 토글로 고른 경우에만 어두워집니다. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  /* 색 구성: Figma 7번 Urban slate
+     #E9E6E7 밝은 회색 · #5E5653 짙은 회갈색 · #7B7F8A 슬레이트 회색 · #AB978C 토프 · #6B7C98 슬레이트 블루
+     바탕은 밝은 회색, 띠와 버튼은 회갈색, 선·표시는 슬레이트 블루, 강조 글자는 한 단계 진한 블루. */
+  --ground: #E9E6E7;
+  --surface: #FFFFFF;
+  --surface-2: #DEDADA;
+  --ink: #2A2523;
+  --ink-2: #5E5653;
+  --ink-3: #67636A;
+  --line: #D3CDCB;
+  --line-2: #B9B1AD;
+  --band: #5E5653;
+  --accent: #6B7C98;      /* 선, 막대, 목록 표시 */
+  --accent-ink: #4F5F7A;  /* 강조 글자 (바탕 대비 5.2:1) */
+  --accent-soft: #E3E8F0; /* 옅은 블루 바탕 */
+  --btn: #5E5653;         /* 기본 버튼 */
+  --btn-ink: #FFFFFF;
+  --btn-hover: #4A4340;
+  --mark-wash: rgba(42, 37, 35, .045);
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --ground: #1E1B1A;
+  --surface: #282423;
+  --surface-2: #322D2B;
+  --ink: #E9E6E7;
+  --ink-2: #B5ADA9;
+  --ink-3: #8F8A88;
+  --line: #3A3533;
+  --line-2: #4D4745;
+  --accent: #9DB0CF;
+  --accent-ink: #B4C3DC;
+  --accent-soft: #252C38;
+  --btn: #9DB0CF;
+  --btn-ink: #1E1B1A;
+  --btn-hover: #B4C3DC;
+  --mark-wash: rgba(255, 255, 255, .05);
+  color-scheme: dark;
+}
+/* 테마와 상관없이 회갈색 띠(홈 상단, 상담 띠, 소개서 마지막 장)에서는 밝은 블루를 씁니다 */
+.on-dark { --accent: #C9D2E1; --accent-ink: #C9D2E1; --btn: #E9E6E7; --btn-ink: #5E5653; --btn-hover: #FFFFFF; }
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-band: var(--band);
+  --color-btn: var(--btn);
+  --color-btn-ink: var(--btn-ink);
+  --font-display: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); text-wrap: balance; }
+  a:focus-visible, button:focus-visible, input:focus-visible,
+  select:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  ::selection { background: var(--accent-soft); }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-[1080px] px-4 sm:px-7; }
+
+  /* 로고 E의 빨간 세 줄 — 섹션 마커로 반복합니다 */
+  .bars { display: inline-flex; flex-direction: column; gap: 2.5px; width: 15px; margin-right: 9px; flex: none; }
+  .bars i { display: block; height: 2.5px; background: var(--accent); }
+
+  .eyebrow {
+    @apply mb-4 flex items-center font-mono text-[11.5px] font-medium tracking-[.14em] uppercase text-accent-ink;
+  }
+  .sec-label {
+    @apply mb-3 flex items-center font-mono text-[11.5px] tracking-[.14em] uppercase text-ink-3;
+  }
+  .h1 { @apply font-display text-[clamp(30px,5vw,50px)] leading-[1.25] font-extrabold tracking-[-.035em]; }
+  .h2 { @apply font-display text-[clamp(23px,3.2vw,32px)] leading-[1.32] font-extrabold tracking-[-.03em]; }
+  .h3 { @apply font-display text-[17.5px] leading-snug font-bold tracking-[-.018em]; }
+  .lede { @apply text-[clamp(15.5px,2vw,17.5px)] leading-[1.8] text-ink-2; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 border px-5 py-3 font-display text-[15px] font-bold tracking-[-.01em] no-underline transition-colors;
+  }
+  .btn-primary { @apply border-btn bg-btn text-btn-ink hover:border-[var(--btn-hover)] hover:bg-[var(--btn-hover)]; }
+  .btn-ghost { @apply border-line-2 bg-surface text-ink hover:border-accent hover:text-accent-ink; }
+
+  /* 1px 선으로 나뉜 격자 — 명함 톤 */
+  .grid-rule { @apply grid gap-px border border-line bg-line; }
+  .grid-rule > * { @apply bg-surface; }
+
+  .field { @apply grid gap-1.5; }
+  .field label { @apply font-display text-[13px] font-bold text-ink-2; }
+  .input {
+    @apply w-full border border-line-2 bg-surface px-3.5 py-2.5 text-[15px] text-ink placeholder:text-ink-3;
+  }
+  .input:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+
+  .prose-nx p { @apply mb-4; }
+  .prose-nx strong { @apply font-medium text-ink; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

@@ -7,3 +7,11 @@ node_modules/
 # 작업 확인용 스크린샷 — 사이트에 배포하지 않음
 preview/
 content/
+
+# Astro
+dist/
+.astro/
+
+
+# Azure Functions 로컬 설정 (API 키가 들어갈 수 있음)
+api/local.settings.json

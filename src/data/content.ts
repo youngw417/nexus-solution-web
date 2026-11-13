@@ -1,0 +1,212 @@
+// 여러 페이지에서 함께 쓰는 문구. 서비스·진행 단계·사례·업종 내용을 여기서 관리합니다.
+
+export const process = [
+  { n: "01", title: "진단", en: "Assess", body: "흩어진 엑셀과 문서, 지금의 업무 흐름을 직접 보고 무엇을 시스템으로 만들지 정합니다." },
+  { n: "02", title: "설계", en: "Design", body: "클라우드 데이터베이스와 화면을 설계하고, 효과가 큰 기능부터 우선순위를 정합니다." },
+  { n: "03", title: "구축", en: "Build", body: "2주 단위로 만들어 시연하고, 실제 회사 데이터로 검증하며 다듬습니다." },
+  { n: "04", title: "이전 · 교육", en: "Launch", body: "기존 엑셀 데이터를 옮기고, 담당자가 바로 쓸 수 있도록 교육합니다." },
+  { n: "05", title: "운영 · 개선", en: "Run", body: "호스팅과 유지보수를 맡고, 쓰면서 나오는 요청을 계속 반영합니다." },
+];
+
+export type Service = {
+  id: string;
+  role: string;
+  name: string;
+  budget: string; // 결재 문서에 쓰기 좋은 이름
+  format: string[];
+  includes: string[];
+  deliverables: string;
+  fit: string;
+  note?: string;
+  image: string; // public/illustrations/ 아래 예시 그림
+};
+
+// 가격은 사이트와 소개서에 싣지 않습니다. 견적은 상담 후 회사별로 드립니다.
+export const services: Service[] = [
+  {
+    id: "assess",
+    image: "/illustrations/excel-to-db.svg",
+    role: "진입",
+    name: "데이터 정리 진단",
+    budget: "업무 데이터 현황 진단 · 시스템화 계획 수립",
+    format: ["2~3주", "부서별 인터뷰", "실제 엑셀 · 문서 분석"],
+    includes: [
+      "흩어진 데이터 현황 지도",
+      "중복 · 오류 · 누락 분석",
+      "클라우드 데이터베이스 설계안",
+      "시스템화 우선순위",
+    ],
+    deliverables: "데이터 현황 보고서 · DB 설계서 · 단계별 구축 로드맵과 견적",
+    fit: "엑셀 파일이 너무 많아 어디서부터 손대야 할지 모르는 회사",
+    note: "진단 후 구축을 계약하시면 진단 비용을 구축 비용에서 차감합니다.",
+  },
+  {
+    id: "build",
+    image: "/illustrations/custom-app.svg",
+    role: "핵심",
+    name: "맞춤 업무 소프트웨어 개발",
+    budget: "업무 시스템 구축 · 디지털 전환(DX)",
+    format: ["6주~", "2주 단위 시연", "실제 데이터로 테스트"],
+    includes: [
+      "기존 엑셀 데이터 이전",
+      "웹 · 모바일 업무 앱",
+      "권한 · 승인 흐름",
+      "대시보드 · 자동 보고서",
+      "현장 사진 · 문서 증빙",
+      "1년 운영 · 개선 포함",
+    ],
+    deliverables: "실제로 동작하는 시스템 · 운영 매뉴얼 · 담당자 교육",
+    fit: "패키지 소프트웨어가 업무와 맞지 않아 엑셀로 버티고 있는 회사",
+  },
+  {
+    id: "run",
+    image: "/illustrations/ops-report.svg",
+    role: "운영",
+    name: "운영 · 개선 구독",
+    budget: "시스템 유지보수 · 운영 지원",
+    format: ["월 단위 계약", "월간 운영 리포트", "정기 개선 회의"],
+    includes: [
+      "클라우드 호스팅 · 백업",
+      "오류 대응",
+      "월 단위 기능 개선",
+      "사용 현황 리포트",
+    ],
+    deliverables: "안정적으로 운영되는 시스템 · 월간 운영 리포트 · 개선 이력",
+    fit: "IT 담당자 없이 시스템을 안정적으로 쓰고 싶은 회사",
+  },
+  {
+    id: "integrate",
+    image: "/illustrations/integrate.svg",
+    role: "선택",
+    name: "기존 솔루션 연동 · 맞춤화",
+    budget: "기존 시스템 연동 · 커스터마이징",
+    format: ["범위에 따라 4주~", "기존 시스템 현황 검토", "단계별 시연"],
+    includes: [
+      "Odoo 등 오픈소스 ERP · 회계 도입과 맞춤화",
+      "그룹웨어 · 회계 프로그램 연동",
+      "쇼핑몰 · 외부 서비스 데이터 연동",
+      "중복 입력 제거",
+    ],
+    deliverables: "연동된 시스템 · 데이터 흐름도 · 운영 매뉴얼",
+    fit: "이미 쓰는 도구는 유지하면서 빈 곳만 채우고 싶은 회사",
+    note: "새로 만드는 것이 답이 아니면, 좋은 도구를 찾아 회사에 맞춰 드립니다.",
+  },
+  {
+    id: "ai",
+    image: "/illustrations/ai-extract.svg",
+    role: "옵션",
+    name: "AI 부가 서비스",
+    budget: "AI 기능 도입 · 업무 자동화",
+    format: ["구축과 함께 또는 별도", "사내 사용 기준 함께 수립"],
+    includes: [
+      "영수증 · 계약서 · 양식 자동 추출",
+      "사내 데이터 질의응답",
+      "보고서 자동 생성",
+      "기존 소프트웨어에 AI 연결",
+    ],
+    deliverables: "AI 기능이 들어간 시스템 · 사내 AI 사용 기준",
+    fit: "데이터는 정리됐고, 다음 단계로 AI를 붙이고 싶은 회사",
+  },
+];
+
+// 사례는 업종과 고객사를 밝히지 않고 기능 중심으로 소개합니다.
+export type Case = {
+  id: string;
+  label: string;
+  title: string;
+  summary: string;
+  before: string[];
+  after: string[];
+  features: string[];
+  fitsFor: string;
+  image: string;
+};
+
+export const cases: Case[] = [
+  {
+    id: "field-form",
+    image: "/illustrations/field-form.svg",
+    label: "현장 양식 디지털화",
+    title: "종이 · 엑셀 점검 양식을 모바일 입력과 자동 보고서로",
+    summary: "현장에서 종이나 엑셀로 작성하던 점검·보고 양식을 모바일 앱으로 옮기고, 입력하는 순간 데이터베이스에 쌓이도록 바꿨습니다.",
+    before: ["종이 양식에 손으로 기록", "사무실에서 엑셀로 다시 옮겨 적기", "양식 버전이 사람마다 다름", "보고서는 매번 수작업으로 취합"],
+    after: ["현장에서 휴대폰으로 바로 입력", "입력과 동시에 클라우드 DB에 저장", "모든 사람이 같은 최신 양식 사용", "보고서는 버튼 하나로 자동 생성"],
+    features: ["모바일 입력", "양식 버전 관리", "자동 보고서", "검토 · 승인 흐름"],
+    fitsFor: "제조 품질 점검, 설비 정비 기록, 건설 현장 일보, 시설 안전 점검",
+  },
+  {
+    id: "photo-evidence",
+    image: "/illustrations/photo-evidence.svg",
+    label: "현장 사진 증빙",
+    title: "촬영과 동시에 위치 · 시간 · 작업 정보를 자동으로 기록",
+    summary: "메신저로 주고받던 현장 사진을 작업 건별로 자동 정리하고, 언제 어디서 무엇을 찍었는지 함께 남도록 만들었습니다.",
+    before: ["사진을 메신저 단체방으로 전송", "어느 작업 사진인지 파일명으로 추측", "필요할 때 사진을 찾느라 대화방을 뒤짐", "증빙 자료로 쓰기에 기록이 부족"],
+    after: ["앱에서 작업을 고르고 바로 촬영", "위치 · 시간 · 작업 정보가 자동 기록", "작업 건별로 사진이 모여 바로 검색", "증빙 보고서로 바로 내보내기"],
+    features: ["작업별 사진 관리", "위치 · 시간 자동 기록", "검색", "증빙 보고서 내보내기"],
+    fitsFor: "시공 · 하자 관리, 설비 설치 확인, 납품 검수, 시설 관리",
+  },
+  {
+    id: "erp",
+    image: "/illustrations/erp-dashboard.svg",
+    label: "오픈소스 ERP 맞춤 도입",
+    title: "회계와 재고를 회사 실정에 맞게 하나로",
+    summary: "오픈소스 ERP(Odoo)를 회사의 회계 · 재고 업무에 맞게 고쳐 도입하고, 흩어져 있던 엑셀 장부를 옮겼습니다.",
+    before: ["회계 · 재고 · 거래처를 각각 다른 엑셀로 관리", "같은 내용을 여러 번 입력", "월말 마감 때마다 숫자가 맞지 않음", "패키지 ERP는 비싸고 업무와 맞지 않음"],
+    after: ["회계 · 재고 · 거래처를 한 시스템에서 관리", "한 번 입력하면 관련 장부에 자동 반영", "월말 마감 시간이 줄고 숫자가 일치", "필요한 기능만 회사에 맞게 추가"],
+    features: ["회계", "재고", "거래처 관리", "기존 엑셀 장부 이전"],
+    fitsFor: "제조 · 유통 중소기업, 회계 · 세무 사무소와 함께하는 도입",
+  },
+];
+
+export type Industry = {
+  id: string;
+  name: string;
+  en: string;
+  summary: string;
+  examples: string[];
+};
+
+export const industries: Industry[] = [
+  {
+    id: "manufacturing",
+    name: "제조",
+    en: "Manufacturing",
+    summary: "생산 · 재고 · 품질 기록이 엑셀에 몰려 있고, 패키지 ERP가 공정과 잘 맞지 않는 중소 제조사.",
+    examples: ["생산 실적 · 불량 기록", "원자재 · 재고 관리", "품질 점검 양식", "설비 정비 이력"],
+  },
+  {
+    id: "education",
+    name: "교육기관",
+    en: "Schools · Academies",
+    summary: "학생 · 수업 · 성적 · 학부모 소통을 여러 도구로 나눠 관리하는 국제학교 · 사립학교 · 학원.",
+    examples: ["학생 · 수강 관리", "성적 · 출결 기록", "학부모 안내 · 상담 기록", "강사 일정 관리"],
+  },
+  {
+    id: "distribution",
+    name: "유통 · 도매",
+    en: "Distribution",
+    summary: "주문 · 재고 · 거래처 관리를 엑셀과 메신저로 처리하는 유통 · 도매 회사.",
+    examples: ["주문 접수 · 출고 관리", "거래처별 단가 · 미수금", "재고 현황 대시보드", "쇼핑몰 주문 연동"],
+  },
+  {
+    id: "professional",
+    name: "전문 서비스",
+    en: "Professional Services",
+    summary: "고객 자료 수집과 증빙 처리에 시간이 많이 드는 회계 · 세무 · 노무 사무소.",
+    examples: ["고객 자료 수집 포털", "증빙 자동 추출 (AI)", "업무 진행 현황 관리", "오픈소스 ERP 연동"],
+  },
+];
+
+// 회사 소개 페이지와 소개서가 함께 씁니다.
+export const capabilities = [
+  { name: "데이터", en: "Data", body: "엑셀과 문서에 흩어진 데이터를 하나의 클라우드 데이터베이스로 정리합니다. 모든 시스템은 정리된 데이터에서 시작합니다." },
+  { name: "개발", en: "Engineering", body: "업무 흐름에 맞춘 웹 · 모바일 소프트웨어를 직접 만듭니다. 필요하면 Odoo 같은 검증된 오픈소스와 AI를 함께 씁니다." },
+  { name: "운영", en: "Operations", body: "만들고 끝내지 않습니다. 호스팅과 유지보수를 맡고, 쓰면서 나오는 요청을 계속 반영합니다." },
+];
+
+export const principles = [
+  { title: "작게 시작합니다", body: "가장 불편한 업무 하나부터 시스템으로 바꾸고, 효과를 확인한 뒤 넓힙니다. 처음부터 큰 계약을 권하지 않습니다." },
+  { title: "필요한 것만 만듭니다", body: "좋은 도구가 이미 있으면 그것을 맞춰 쓰도록 권합니다. 새로 만드는 것은 회사에 꼭 필요한 부분만입니다." },
+  { title: "데이터는 고객의 것입니다", body: "모든 데이터는 고객사 소유로 두고, 언제든 내려받을 수 있게 만듭니다. 접근 권한과 백업을 기본으로 설계합니다." },
+  { title: "가까이 있습니다", body: "판교에 있어 판교 · 분당 기업은 온사이트로 빠르게 찾아갑니다." },
+];
