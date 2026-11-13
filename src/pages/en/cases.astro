@@ -1,0 +1,85 @@
+---
+import Base from "../../layouts/Base.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { cases, industries } from "../../data/content.en";
+---
+<Base title="Cases & Industries" description="Cases in digital field forms, field photo evidence, and tailored open-source ERP, with examples for manufacturing, education, distribution, and professional services.">
+  <section class="border-b border-line py-[clamp(56px,9vw,96px)]">
+    <div class="wrap">
+      <SectionHead as="h1" label="Cases & Industries" title="From spreadsheets to systems:<br>work we've changed">
+        We don't name our clients or their industries. Instead we show <strong>what changed, and how</strong>, feature by feature.
+        The same approach carries over to other industries.
+      </SectionHead>
+      <nav class="mt-8 flex flex-wrap gap-2" aria-label="Jump to a case">
+        {cases.map((c) => <a href={`#${c.id}`} class="border border-line-2 bg-surface px-3.5 py-1.5 text-[14px] text-ink no-underline hover:border-accent hover:text-accent-ink">{c.label}</a>)}
+        <a href="#industries" class="border border-line-2 bg-surface px-3.5 py-1.5 text-[14px] text-ink no-underline hover:border-accent hover:text-accent-ink">By industry</a>
+      </nav>
+    </div>
+  </section>
+
+  {cases.map((c, i) => (
+    <section id={c.id} class={`scroll-mt-20 border-b border-line py-16 ${i % 2 ? "bg-surface" : ""}`}>
+      <div class="wrap">
+        <div class="mb-10 grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+          <div>
+            <p class="sec-label"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>Case {String(i + 1).padStart(2, "0")} — {c.label}</p>
+            <h2 class="h2 mb-3">{c.title}</h2>
+            <p class="m-0 max-w-[60ch] text-ink-2">{c.summary}</p>
+          </div>
+          <figure class="m-0">
+            <img src={c.image} width="800" height="640" alt={`Sample screen: ${c.label}`} loading={i === 0 ? "eager" : "lazy"} class="block h-auto w-full border border-line" />
+            <figcaption class="mt-2 text-[12.5px] text-ink-3">A sample screen. Real screens are designed around your company's work.</figcaption>
+          </figure>
+        </div>
+
+        <div class="grid gap-10 lg:grid-cols-[1.25fr_1fr]">
+          <div class="grid-rule self-start sm:grid-cols-2">
+            <div class="!bg-surface-2 p-5">
+              <p class="mb-3 font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">Before</p>
+              <ol class="m-0 grid gap-2 list-decimal pl-5 text-[14px] text-ink-2">{c.before.map((x) => <li>{x}</li>)}</ol>
+            </div>
+            <div class="p-5">
+              <p class="mb-3 font-mono text-[11px] tracking-[.12em] text-accent-ink uppercase">After</p>
+              <ol class="m-0 grid gap-2 list-decimal pl-5 text-[14px] text-ink marker:text-accent">{c.after.map((x) => <li>{x}</li>)}</ol>
+            </div>
+          </div>
+
+          <div class="grid-rule self-start">
+            <div class="p-5">
+              <p class="mb-3 font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">Key features</p>
+              <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+                {c.features.map((f) => <li class="border border-line-2 px-2.5 py-1 text-[13.5px] text-ink">{f}</li>)}
+              </ul>
+            </div>
+            <div class="p-5">
+              <p class="mb-2 font-mono text-[11px] tracking-[.12em] text-accent-ink uppercase">Also a fit for</p>
+              <p class="m-0 text-[14.5px] text-ink">{c.fitsFor}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section id="industries" class="scroll-mt-20 border-b border-line py-16">
+    <div class="wrap">
+      <SectionHead label="By industry" title="The kinds of companies we work with">
+        The data that piles up in spreadsheets differs by industry, but the way to organize it and turn it into a system is the same.
+      </SectionHead>
+      <div class="grid-rule mt-8 sm:grid-cols-2 lg:grid-cols-4">
+        {industries.map((d) => (
+          <div class="flex flex-col gap-3 p-6">
+                        <h3 class="h3 m-0">{d.name}</h3>
+            <p class="m-0 text-[14px] leading-relaxed text-ink-2">{d.summary}</p>
+            <ul class="mt-auto list-none space-y-1 border-t border-line p-0 pt-3 text-[13.5px] text-ink">
+              {d.examples.map((t) => <li>· {t}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Which of your spreadsheets should become a system first?" />
+</Base>

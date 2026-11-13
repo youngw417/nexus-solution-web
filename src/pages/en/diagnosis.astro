@@ -1,0 +1,20 @@
+---
+import Base from "../../layouts/Base.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import Diagnosis from "../../components/Diagnosis.tsx";
+---
+<Base title="Readiness Check" description="Twelve questions, three minutes. A free check of how much moving your work into a system would change and how ready your data is, with a first step that fits.">
+  <section class="py-[clamp(56px,9vw,96px)]">
+    <div class="wrap grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:items-start">
+      <div class="lg:sticky lg:top-24">
+        <SectionHead as="h1" label="Free readiness check" title="How much would change if your work ran on a system?">
+          Every company has its own reasons for staying on spreadsheets. There may not be enough work to need a system, or the data may be too scattered to know where to begin.
+          <strong>Twelve questions measure both at once</strong> and point to a first step that fits your company.
+        </SectionHead>
+        <p class="mt-6 text-[13px] text-ink-3">Your answers are used only to calculate the result and are not stored anywhere unless you request the report.</p>
+      </div>
+      <Diagnosis client:load lang="en" />
+      <noscript><p class="text-ink-2">Please turn on JavaScript in your browser to use the readiness check.</p></noscript>
+    </div>
+  </section>
+</Base>

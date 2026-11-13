@@ -1,0 +1,48 @@
+---
+import Base from "../../layouts/Base.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import { site } from "../../data/site.en";
+---
+<Base title="Contact" description="A free 30-minute consultation to work out where to start moving your spreadsheet work into a system. Phone +82 10-5023-5369 · info@nexus-ai-sol.com">
+  <section class="py-[clamp(56px,9vw,96px)]">
+    <div class="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+      <div>
+        <SectionHead as="h1" label="Contact" title="Thirty minutes is enough to find a starting point">
+          It's fine if you haven't decided what to build yet. Tell us about the spreadsheets and forms you use and the work that slows you down, and we'll work out a first step that fits your company. <strong>The first consultation is free.</strong>
+        </SectionHead>
+
+        <dl class="grid-rule mt-8">
+          <div class="p-5">
+            <dt class="font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">Phone</dt>
+            <dd class="m-0"><a href={site.phoneHref} class="font-display text-[21px] font-bold tracking-[-.02em] text-ink no-underline hover:text-accent-ink">{site.phone}</a></dd>
+          </div>
+          <div class="p-5">
+            <dt class="font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">Email</dt>
+            <dd class="m-0"><a href={`mailto:${site.email}`} class="font-display text-[21px] font-bold tracking-[-.02em] text-ink no-underline hover:text-accent-ink">{site.email}</a></dd>
+          </div>
+          <div class="p-5">
+            <dt class="font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">Address</dt>
+            <dd class="m-0 text-ink-2">{site.address} ({site.postcode})</dd>
+          </div>
+          {site.calLink && (
+            <div class="p-5">
+              <dt class="font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase">Book online</dt>
+              <dd class="m-0 mt-2"><a href={site.calLink} class="btn btn-ghost" target="_blank" rel="noopener">Book a 30-minute consultation</a></dd>
+            </div>
+          )}
+        </dl>
+
+        <ol class="mt-8 grid list-none gap-3 p-0 text-[14px] text-ink-2">
+          <li><b class="mr-2 font-mono text-accent-ink">1</b>Send us a message and we'll reply within one business day.</li>
+          <li><b class="mr-2 font-mono text-accent-ink">2</b>We hear about your situation in a 30-minute consultation, online or in person.</li>
+          <li><b class="mr-2 font-mono text-accent-ink">3</b>We send you a proposed approach and a quote that fit your company.</li>
+        </ol>
+        <img src="/photos/consultation.jpg" width="1280" height="1347" loading="lazy" class="mt-8 block aspect-[16/10] w-full border border-line object-cover object-[center_72%]"
+             alt="A building atrium with a slatted wood ceiling and street trees visible through floor-to-ceiling glass" />
+      </div>
+
+      <ContactForm />
+    </div>
+  </section>
+</Base>

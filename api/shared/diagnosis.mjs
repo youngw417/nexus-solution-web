@@ -64,11 +64,77 @@ export const types = {
   },
 };
 
+// ---------- English ----------
+// 문항 id · 축 · 보기 순서는 한국어와 같아야 합니다. 채점은 언어와 상관없이 같습니다.
+
+/** @type {Question[]} */
+export const questionsEn = [
+  { id: "o1", axis: "opportunity", area: "Scattered data", q: "For a single area of work (orders, inventory, customers), how many spreadsheets or tools is the data spread across?", options: ["1–2", "3–5", "6–10", "More than 10"] },
+  { id: "o2", axis: "opportunity", area: "Duplicate entry", q: "How often do you enter the same information into more than one file or system?", options: ["Almost never", "Sometimes", "Often", "Almost every day"] },
+  { id: "o3", axis: "opportunity", area: "Compiling reports", q: "How many hours a week go into gathering and tidying data by hand for reports?", options: ["Under 1 hour", "1–4 hours", "4–8 hours", "More than 8 hours"] },
+  { id: "o4", axis: "opportunity", area: "Versions & errors", q: "How often are you unsure which file is the latest, or have to re-check numbers that don't match?", options: ["Almost never", "A few times a month", "A few times a week", "Almost every day"] },
+  { id: "o5", axis: "opportunity", area: "Field records", q: "Do you have work recorded in the field on paper, in photos, or in chat apps and then written up again later?", options: ["None", "Some", "Quite a lot", "It's core to our work"] },
+  { id: "o6", axis: "opportunity", area: "People affected", q: "How many employees do this kind of data work?", options: ["Fewer than 5", "5–20", "20–50", "More than 50"] },
+
+  { id: "r1", axis: "readiness", area: "Organized files", q: "How well organized are your business data and documents?", options: ["Scattered across personal PCs", "There's a shared folder, but it's disorganized", "Mostly organized", "Kept in set locations with set rules"] },
+  { id: "r2", axis: "readiness", area: "Work rules", q: "Are your work steps and forms defined?", options: ["Everyone does it differently", "Only rough habits", "The main forms are defined", "Procedures and forms are documented"] },
+  { id: "r3", axis: "readiness", area: "Cloud acceptance", q: "What is your company's position on keeping company data in the cloud?", options: ["Not allowed", "No clear policy", "Allowed if conditions are met", "We already use cloud services"] },
+  { id: "r4", axis: "readiness", area: "Ownership", q: "Is someone assigned to lead a system rollout?", options: ["No one", "Someone is interested", "A person has been assigned", "There's a dedicated team or task force"] },
+  { id: "r5", axis: "readiness", area: "Leadership commitment", q: "How committed is leadership to moving work into systems?", options: ["No particular interest", "Interested", "Has asked for a review", "Has set a budget and goals"] },
+  { id: "r6", axis: "readiness", area: "Current tools", q: "What state are the tools you work with today in?", options: ["Mostly paper and spreadsheets", "Spreadsheets and a few free tools", "We adopted packaged software, but it doesn't fit our work well", "Our main work runs on systems"] },
+];
+
+export const axisLabelEn = { opportunity: "System Impact", readiness: "Data Readiness" };
+
+/** @type {Record<string, ResultType>} */
+export const typesEn = {
+  leap: {
+    id: "leap",
+    title: "Ready to move to a system now",
+    summary: "A lot of your work runs on spreadsheets, so moving to a system will take away a lot of effort. Your data and work rules are in reasonable shape, so you can start building right away.",
+    actions: ["Pick your most painful task and make it your first system", "Migrate existing spreadsheet data to a cloud database", "Confirm the results, then extend to other work"],
+    service: "Custom Business Software",
+    serviceHref: "/en/services#build",
+  },
+  guard: {
+    id: "guard",
+    title: "High impact, but your data needs organizing first",
+    summary: "Moving to a system would take away a lot of effort. But your data is scattered and your work rules aren't settled, so building right away could send you back to spreadsheets. Organize the data first and things will move faster.",
+    actions: ["Take stock of your scattered spreadsheets and forms", "Clean up duplicate data and design a single database structure", "Set systemization priorities and a phased plan"],
+    service: "Data Assessment",
+    serviceHref: "/en/services#assess",
+  },
+  explore: {
+    id: "explore",
+    title: "The foundation is there — what you need is connection",
+    summary: "Your data and tools are largely in place. Rather than building something big and new, connecting the tools you already use and filling only the gaps will work better.",
+    actions: ["Map the tools you use and how data flows between them", "Remove duplicate entry by integrating at those points", "Add only the features you need, built to fit"],
+    service: "Integration & Customization",
+    serviceHref: "/en/services#integrate",
+  },
+  start: {
+    id: "start",
+    title: "A good fit for starting with one small task",
+    summary: "Both the need for a system and the groundwork are still at an early stage. Rather than a big investment, it makes sense to tidy up your single most painful spreadsheet and see the effect for yourself.",
+    actions: ["Pick the one spreadsheet you use most", "Clean up that data and turn it into a simple cloud screen", "Review the results after three months and decide the next step"],
+    service: "Data Assessment",
+    serviceHref: "/en/services#assess",
+  },
+};
+
+/** 언어별 문항 · 축 이름 · 유형 */
+export const locales = {
+  ko: { questions, axisLabel, types },
+  en: { questions: questionsEn, axisLabel: axisLabelEn, types: typesEn },
+};
+
 /**
  * 답변(문항 id → 0~3)을 받아 축별 점수와 유형을 계산합니다.
  * @param {Record<string, number>} answers
+ * @param {"ko" | "en"} [lang] 결과 문구의 언어. 점수는 언어와 상관없이 같습니다.
  */
-export function score(answers) {
+export function score(answers, lang = "ko") {
+  const { questions, types } = locales[lang] ?? locales.ko;
   /** @type {Record<Axis, number>} */
   const sum = { opportunity: 0, readiness: 0 };
   /** @type {{ id: string, axis: Axis, area: string, value: number }[]} */

@@ -2,33 +2,40 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { site } from "../data/site";
+import { site as siteKo } from "../data/site";
+import { site as siteEn } from "../data/site.en";
+import { langOf, localePath, ui } from "../i18n";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const {
-  title,
-  description = "Nexus Solution은 엑셀과 문서에 흩어진 데이터를 클라우드로 모으고, 회사에 꼭 맞는 업무 소프트웨어를 만들어 운영까지 맡습니다. 판교 기반 맞춤 소프트웨어 개발 · 오픈소스 ERP 연동 · AI 부가 서비스.",
-} = Astro.props;
+const lang = langOf(Astro.url);
+const t = ui[lang];
+const site = lang === "en" ? siteEn : siteKo;
+const { title, description = t.description } = Astro.props;
 
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | 회사에 꼭 맞는 소프트웨어`;
-const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", site.url).href;
+const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | ${t.titleDefault}`;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const canonical = new URL(path, site.url).href;
+// 같은 페이지의 한국어 · 영어 주소 (검색엔진용 hreflang)
+const alternates = (["ko", "en"] as const).map((l) => ({ lang: l, href: new URL(localePath(path, l), site.url).href }));
 ---
 <!doctype html>
-<html lang="ko">
+<html lang={t.htmlLang}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{fullTitle}</title>
 <meta name="description" content={description}>
 <link rel="canonical" href={canonical}>
+{alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href}>)}
+<link rel="alternate" hreflang="x-default" href={alternates[0].href}>
 <meta name="theme-color" content="#5E5653">
 
 <meta property="og:type" content="website">
-<meta property="og:locale" content="ko_KR">
+<meta property="og:locale" content={t.ogLocale}>
 <meta property="og:site_name" content={site.name}>
 <meta property="og:url" content={canonical}>
 <meta property="og:title" content={fullTitle}>
@@ -78,7 +85,7 @@ const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", site.url
 </script>
 </head>
 <body class="min-h-screen">
-  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-surface focus:px-4 focus:py-2">본문으로 건너뛰기</a>
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-surface focus:px-4 focus:py-2">{t.skip}</a>
   <Header />
   <main id="main">
     <slot />

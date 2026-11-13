@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" role="img" aria-label="Sample assessment results screen: overall score, two axis scores, result type, and recommended first steps">
+  <style>.d{font-family:'Gothic A1','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-weight:700}.b{font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif}.m{font-family:'IBM Plex Mono',ui-monospace,monospace}</style>
+  <defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#111" flood-opacity=".14"/></filter></defs>
+  <rect width="640" height="440" fill="#F3F1F1"/>
+  <circle cx="470" cy="250" r="190" fill="#E3E8F0"/>
+
+  <!-- Results card -->
+  <g filter="url(#sh)"><rect x="40" y="36" width="420" height="368" rx="4" fill="#fff"/></g>
+  <g fill="#6B7C98"><rect x="64" y="62" width="14" height="2.5"/><rect x="64" y="67" width="14" height="2.5"/><rect x="64" y="72" width="14" height="2.5"/></g>
+  <text x="86" y="73" class="m" font-size="10.5" fill="#6B7C98" letter-spacing="1.4">Results</text>
+
+  <text x="64" y="106" class="m" font-size="10" fill="#67636A">Overall score</text>
+  <text x="64" y="152" class="d" font-size="50" fill="#111" letter-spacing="-2">60<tspan font-size="22" fill="#67636A">%</tspan></text>
+
+  <g class="b" font-size="11.5">
+    <text x="196" y="104" fill="#111" font-weight="700">System Impact</text><text x="436" y="104" text-anchor="end" class="m" font-size="10.5" fill="#111">78%</text>
+    <rect x="196" y="112" width="240" height="8" fill="#E4E0E0"/><rect x="196" y="112" width="187" height="8" fill="#6B7C98"/>
+    <text x="196" y="142" fill="#111" font-weight="700">Data Readiness</text><text x="436" y="142" text-anchor="end" class="m" font-size="10.5" fill="#111">41%</text>
+    <rect x="196" y="150" width="240" height="8" fill="#E4E0E0"/><rect x="196" y="150" width="98" height="8" fill="#111"/>
+  </g>
+
+  <text x="64" y="200" class="d" font-size="18" fill="#111">High impact, but data cleanup comes first</text>
+  <text x="64" y="224" class="b" font-size="11" fill="#5E5653">Moving to a system would cut a lot of manual work. Clean up</text>
+  <text x="64" y="241" class="b" font-size="11" fill="#5E5653">your data first and the build goes much faster.</text>
+
+  <rect x="64" y="262" width="372" height="118" fill="#fff" stroke="#D3CDCB"/>
+  <rect x="290" y="262" width="1" height="118" fill="#D3CDCB"/>
+  <text x="80" y="286" class="m" font-size="9.5" fill="#6B7C98" letter-spacing="1.2">Recommended first steps</text>
+  <g class="b" font-size="10.5" fill="#111">
+    <text x="80" y="310"><tspan fill="#6B7C98">1.</tspan> Map your scattered Excel files</text>
+    <text x="80" y="332"><tspan fill="#6B7C98">2.</tspan> Design a single database</text>
+    <text x="80" y="354"><tspan fill="#6B7C98">3.</tspan> Set priorities and a phased plan</text>
+  </g>
+  <text x="306" y="286" class="m" font-size="9.5" fill="#67636A" letter-spacing="1.2">Best fit</text>
+  <text x="306" y="312" class="d" font-size="13" fill="#111">Data Cleanup<tspan x="306" dy="17">Assessment</tspan></text>
+  <text x="306" y="362" class="d" font-size="11" fill="#6B7C98">Learn more →</text>
+
+  <!-- Report email card -->
+  <g filter="url(#sh)"><rect x="410" y="250" width="200" height="132" rx="4" fill="#111"/></g>
+  <g transform="translate(430 274)">
+    <rect width="30" height="22" rx="2" fill="none" stroke="#AEBBD1" stroke-width="2"/>
+    <path d="M1 2 L15 13 L29 2" fill="none" stroke="#AEBBD1" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+  <text x="430" y="324" class="d" font-size="13" fill="#F0F0F0">Full report by email</text>
+  <text x="430" y="344" class="b" font-size="10" fill="#ABABAB">Area-by-area notes · rollout order</text>
+  <text x="430" y="362" class="b" font-size="10" fill="#ABABAB">Ready for internal reporting</text>
+</svg>

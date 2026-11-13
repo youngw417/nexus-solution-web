@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import { site } from "../../data/site.en";
+---
+<Base title="Resources" description="The Nexus Solution company brochure and materials for evaluating a new system, ready to attach to internal reports and approval requests.">
+  <section class="border-b border-line py-[clamp(56px,9vw,96px)]">
+    <div class="wrap">
+      <SectionHead as="h1" label="Resources" title="Materials for your internal reporting">
+        When you're evaluating a new business system, you need something to show your manager and executives. We've put our services, how we work, and sample deliverables into materials you can <strong>attach to an approval request as is</strong>.
+      </SectionHead>
+    </div>
+  </section>
+
+  <section class="border-b border-line py-16">
+    <div class="wrap grid gap-10 lg:grid-cols-[1fr_1.2fr]">
+      <div>
+        <div class="border border-line border-t-2 border-t-accent bg-surface p-6">
+          <p class="mb-1 font-mono text-[11px] tracking-[.12em] text-accent-ink uppercase">PDF</p>
+          <h2 class="h3 mb-2 !text-[21px]">Nexus Solution company brochure</h2>
+          <ul class="mb-5 grid gap-1.5 list-disc pl-5 text-[14.5px] text-ink-2 marker:text-accent">
+            <li>About the company and how we work</li>
+            <li>Our five services and their timelines</li>
+            <li>Sample deliverables for each stage</li>
+            <li>Cases and examples by industry</li>
+          </ul>
+          {site.brochure
+            ? <a href={site.brochure} class="btn btn-primary" download>Download PDF</a>
+            : <p class="m-0 text-[14px] text-ink-2">Request it with the form on the right and <strong class="font-medium text-ink">we'll email it to you.</strong></p>}
+        </div>
+
+        <h2 class="h3 mt-10 mb-3">Also worth a look</h2>
+        <ul class="grid-rule list-none p-0">
+          <li><a href="/en/diagnosis" class="block p-5 no-underline hover:!bg-ground"><b class="block font-display text-ink">Readiness check report</b><span class="text-[14px] text-ink-2">Take the 3-minute check and get a detailed report you can use for internal reporting.</span></a></li>
+          <li><a href="/en/cases" class="block p-5 no-underline hover:!bg-ground"><b class="block font-display text-ink">Cases and industries</b><span class="text-[14px] text-ink-2">Field forms, photo evidence, and ERP rollout cases, with examples by industry.</span></a></li>
+          <li><a href="/en/services" class="block p-5 no-underline hover:!bg-ground"><b class="block font-display text-ink">Services and how they run</b><span class="text-[14px] text-ink-2">Including budget line items and deliverables.</span></a></li>
+        </ul>
+      </div>
+
+      {site.brochure && (
+        <a href={site.brochure} download class="group relative block aspect-[5/4] self-start no-underline" aria-label="Download the company brochure PDF">
+          <img src="/brochure-preview/en/page-10.jpg" width="579" height="819" alt="" loading="lazy"
+               class="absolute top-[8%] right-[4%] w-[46%] rotate-[5deg] border border-line shadow-[0_18px_40px_-18px_rgba(0,0,0,.35)] transition-transform group-hover:rotate-[7deg]" />
+          <img src="/brochure-preview/en/page-7.jpg" width="579" height="819" alt="" loading="lazy"
+               class="absolute top-[4%] right-[24%] w-[46%] -rotate-[2deg] border border-line shadow-[0_18px_40px_-18px_rgba(0,0,0,.35)] transition-transform group-hover:-rotate-[4deg]" />
+          <img src="/brochure-preview/en/page-1.jpg" width="579" height="819" alt="Preview of the company brochure cover"
+               class="absolute top-0 left-[2%] w-[46%] -rotate-[6deg] border border-line shadow-[0_18px_40px_-18px_rgba(0,0,0,.35)] transition-transform group-hover:-rotate-[8deg]" />
+          <span class="absolute bottom-0 left-[2%] font-mono text-[11px] tracking-[.12em] text-ink-3 uppercase group-hover:text-accent-ink">A4 · 12 pages · preview ↓</span>
+        </a>
+      )}
+      {!site.brochure && (
+        <div>
+          <h2 class="h3 mb-4">Request the brochure</h2>
+          <ContactForm kind="brochure" submitLabel="Get the brochure" messageLabel="Anything else you need (optional)" messagePlaceholder="e.g. a quote template or similar cases" />
+        </div>
+      )}
+    </div>
+  </section>
+</Base>

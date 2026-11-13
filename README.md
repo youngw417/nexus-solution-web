@@ -34,6 +34,24 @@ without it the API answers 503 and the form shows the "send by email" fallback.
 | `api/src/functions/lead.js` | `POST /api/lead` — contact / brochure / diagnosis-report requests, sent via Resend |
 | `public/` | Logos, favicon, OG image, `staticwebapp.config.json` |
 
+## Languages
+
+Korean is served at `/`, English at `/en/…` with the same page names. The header has a KO / EN switch that
+opens the same page in the other language.
+
+| Korean | English |
+| --- | --- |
+| `src/pages/*.astro` | `src/pages/en/*.astro` |
+| `src/data/content.ts`, `src/data/site.ts` | `src/data/content.en.ts`, `src/data/site.en.ts` |
+| `public/illustrations/*.svg` | `public/illustrations/en/*.svg` |
+
+Shared components (header, footer, contact form, CTA band) take their wording from `src/i18n.ts`; the
+readiness-check questions and result types for both languages are in `api/shared/diagnosis.mjs`.
+When you change wording or layout in one language, change the matching file for the other.
+`npm run brochure` builds both brochures: `public/nexus-solution-brochure.pdf` (from `src/pages/brochure.astro`)
+and `public/nexus-solution-brochure-en.pdf` (from `src/pages/en/brochure.astro`), plus the preview images in
+`public/brochure-preview/` and `public/brochure-preview/en/`.
+
 ## Deploy
 
 Pushing to `main` runs `.github/workflows/azure-static-web-apps.yml`: it builds

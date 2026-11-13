@@ -1,6 +1,14 @@
 ---
-import { site } from "../data/site";
-import { services } from "../data/content";
+import { site as siteKo } from "../data/site";
+import { site as siteEn } from "../data/site.en";
+import { services as servicesKo } from "../data/content";
+import { services as servicesEn } from "../data/content.en";
+import { langOf, ui } from "../i18n";
+
+const lang = langOf(Astro.url);
+const f = ui[lang].form;
+const site = lang === "en" ? siteEn : siteKo;
+const services = lang === "en" ? servicesEn : servicesKo;
 
 interface Props {
   // 어떤 경로로 들어온 문의인지 구분합니다 (예: "contact", "brochure")
@@ -11,34 +19,34 @@ interface Props {
 }
 const {
   kind = "contact",
-  submitLabel = "상담 신청하기",
-  messageLabel = "문의 내용",
-  messagePlaceholder = "현재 불편한 업무나 궁금한 점을 적어 주세요. (예: 주문 · 재고를 엑셀 5개로 관리하는데 하나로 합치고 싶습니다)",
+  submitLabel = f.submit,
+  messageLabel = f.messageLabel,
+  messagePlaceholder = f.messagePlaceholder,
 } = Astro.props;
 ---
-<form class="border border-line bg-surface p-6 sm:p-8" data-lead-form data-kind={kind} novalidate>
+<form class="border border-line bg-surface p-6 sm:p-8" data-lead-form data-kind={kind} data-lang={lang} novalidate>
   <div class="grid gap-5 sm:grid-cols-2">
     <div class="field">
-      <label for={`${kind}-company`}>회사명 <span class="text-accent-ink">*</span></label>
+      <label for={`${kind}-company`}>{f.company} <span class="text-accent-ink">*</span></label>
       <input class="input" id={`${kind}-company`} name="company" required autocomplete="organization">
     </div>
     <div class="field">
-      <label for={`${kind}-name`}>성함 · 직책 <span class="text-accent-ink">*</span></label>
-      <input class="input" id={`${kind}-name`} name="name" required autocomplete="name" placeholder="홍길동 과장">
+      <label for={`${kind}-name`}>{f.name} <span class="text-accent-ink">*</span></label>
+      <input class="input" id={`${kind}-name`} name="name" required autocomplete="name" placeholder={f.namePlaceholder}>
     </div>
     <div class="field">
-      <label for={`${kind}-email`}>이메일 <span class="text-accent-ink">*</span></label>
+      <label for={`${kind}-email`}>{f.email} <span class="text-accent-ink">*</span></label>
       <input class="input" id={`${kind}-email`} name="email" type="email" required autocomplete="email">
     </div>
     <div class="field">
-      <label for={`${kind}-phone`}>연락처</label>
-      <input class="input" id={`${kind}-phone`} name="phone" type="tel" autocomplete="tel" placeholder="010-0000-0000">
+      <label for={`${kind}-phone`}>{f.phone}</label>
+      <input class="input" id={`${kind}-phone`} name="phone" type="tel" autocomplete="tel" placeholder={f.phonePlaceholder}>
     </div>
     {kind === "contact" && (
       <div class="field sm:col-span-2">
-        <label for={`${kind}-interest`}>관심 서비스</label>
+        <label for={`${kind}-interest`}>{f.interest}</label>
         <select class="input" id={`${kind}-interest`} name="interest">
-          <option value="">아직 정하지 않았습니다</option>
+          <option value="">{f.interestNone}</option>
           {services.map((s) => <option value={s.name}>{s.name}</option>)}
         </select>
       </div>
@@ -51,7 +59,7 @@ const {
     <div class="hidden" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off"></div>
     <label class="flex items-start gap-2.5 text-[13.5px] text-ink-2 sm:col-span-2">
       <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 flex-none accent-[var(--accent)]">
-      <span>상담을 위한 개인정보(회사명, 성함, 이메일, 연락처) 수집·이용에 동의합니다. 수집한 정보는 상담 목적으로만 사용하며 상담 종료 후 1년간 보관합니다.</span>
+      <span>{f.consent}</span>
     </label>
   </div>
   <div class="mt-6 flex flex-wrap items-center gap-4">
@@ -60,7 +68,7 @@ const {
   </div>
 </form>
 
-<script define:vars={{ email: site.email, phone: site.phone }}>
+<script define:vars={{ email: site.email, phone: site.phone, f }}>
   document.querySelectorAll("[data-lead-form]").forEach(function (form) {
     var status = form.querySelector("[data-status]");
     var btn = form.querySelector("button[type=submit]");
@@ -74,8 +82,9 @@ const {
       var data = Object.fromEntries(new FormData(form));
       data.kind = form.dataset.kind;
       data.page = location.pathname;
+      data.lang = form.dataset.lang;
       btn.disabled = true;
-      status.textContent = "보내는 중…";
+      status.textContent = f.sending;
       try {
         var res = await fetch("/api/lead", {
           method: "POST",
@@ -84,14 +93,20 @@ const {
         });
         if (!res.ok) throw new Error(String(res.status));
         var done = document.createElement("div");
-        done.innerHTML = '<p class="h3 mb-2">접수되었습니다. 감사합니다.</p><p class="m-0 text-ink-2"></p>';
-        done.lastChild.textContent = "영업일 기준 1일 안에 " + data.email + "로 연락드리겠습니다. 급하시면 " + phone + "로 전화 주세요.";
+        done.innerHTML = '<p class="h3 mb-2"></p><p class="m-0 text-ink-2"></p>';
+        done.firstChild.textContent = f.doneTitle;
+        done.lastChild.textContent = f.doneBody.replace("{email}", data.email).replace("{phone}", phone);
         form.replaceChildren(done);
       } catch (err) {
         // 서버 접수가 안 되면 메일 앱으로 넘겨 문의가 사라지지 않게 합니다
-        var body = ["회사명: " + data.company, "성함: " + data.name, "이메일: " + data.email, "연락처: " + (data.phone || ""), data.interest ? "관심 서비스: " + data.interest : "", "", data.message || ""].join("\n");
-        var href = "mailto:" + email + "?subject=" + encodeURIComponent("[웹사이트 문의] " + data.company) + "&body=" + encodeURIComponent(body);
-        status.innerHTML = '전송에 실패했습니다. <a href="' + href + '" class="text-accent-ink">메일로 보내기</a> 또는 ' + phone + '로 연락 주세요.';
+        var body = [f.mailCompany + ": " + data.company, f.mailName + ": " + data.name, f.mailEmail + ": " + data.email, f.mailPhone + ": " + (data.phone || ""), data.interest ? f.mailInterest + ": " + data.interest : "", "", data.message || ""].join("\n");
+        var href = "mailto:" + email + "?subject=" + encodeURIComponent(f.mailSubject + " " + data.company) + "&body=" + encodeURIComponent(body);
+        status.textContent = f.failed + " ";
+        var link = document.createElement("a");
+        link.href = href;
+        link.className = "text-accent-ink";
+        link.textContent = f.byMail;
+        status.append(link, " " + f.orCall.replace("{phone}", phone));
         btn.disabled = false;
       }
     });
